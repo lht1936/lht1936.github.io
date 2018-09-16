@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>湘江鸿的博客</title>
+    <description>记录湘江鸿技术与生活的点点滴滴</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 16 Sep 2018 14:43:51 +0800</pubDate>
+    <lastBuildDate>Sun, 16 Sep 2018 14:43:51 +0800</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;This is post no right side bar to nav posts.&lt;/p&gt;
+
+&lt;p&gt;You just need to set &lt;strong&gt;no-post-nav: true&lt;/strong&gt; for your post&lt;/p&gt;
+</description>
+        <pubDate>Fri, 13 May 2016 19:25:35 +0800</pubDate>
+        <link>http://localhost:4000/jekyll/update/2016/05/13/Example-No-Sidebar-Nav.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2016/05/13/Example-No-Sidebar-Nav.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;Welcome to use Yummy Jekyll as your jekyll theme!&lt;/p&gt;
+
+&lt;h2 id=&quot;yummy-jekyll&quot;&gt;Yummy Jekyll&lt;/h2&gt;
+
+&lt;h2 id=&quot;how-to-install&quot;&gt;How to install&lt;/h2&gt;
+
+&lt;h2 id=&quot;licence&quot;&gt;Licence&lt;/h2&gt;
+</description>
+        <pubDate>Fri, 13 May 2016 19:25:35 +0800</pubDate>
+        <link>http://localhost:4000/jekyll/update/2016/05/13/welcome-to-yummy.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2016/05/13/welcome-to-yummy.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>CSS Animation</title>
+        <description>&lt;p&gt;Quick note about CSS animation.&lt;/p&gt;
+
+&lt;h2 id=&quot;css-animation&quot;&gt;CSS Animation&lt;/h2&gt;
+
+&lt;p&gt;CSS3 animation lets an element gradually change from one style to another.&lt;/p&gt;
+
+&lt;p&gt;Two steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Use &lt;code class=&quot;highlighter-rouge&quot;&gt;@keyframes&lt;/code&gt; to define an animation.&lt;/li&gt;
+  &lt;li&gt;Set this animation on an element with animation properties&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We could set properties one-by-one or with following shorthand:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;animation-name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;animation-duration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;animation-timing-function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;animation-delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;animation-iteration-count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;animation-direction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;animation-fill-mode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;animation-play-state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;keyframes&quot;&gt;@keyframes&lt;/h2&gt;
+
+&lt;p&gt;It defines what the animation looks like at each stage of the animation timeline. It is composed of:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Name of the animation. For example, changeColor.&lt;/li&gt;
+  &lt;li&gt;Stages: From 0% to 100% to represent the whole process of animation&lt;/li&gt;
+  &lt;li&gt;CSS Properties: The CSS properties defined for each stage of the animation timeline.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Following example creates an animation called &lt;code class=&quot;highlighter-rouge&quot;&gt;changeColor&lt;/code&gt; and assign it to &lt;code class=&quot;highlighter-rouge&quot;&gt;div:hover&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@keyframes&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changeColor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:hover&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changeColor&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5s&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ease&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.1s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In above example, we could also use &lt;code class=&quot;highlighter-rouge&quot;&gt;from&lt;/code&gt; to represent &lt;code class=&quot;highlighter-rouge&quot;&gt;0%&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;to&lt;/code&gt; to represent &lt;code class=&quot;highlighter-rouge&quot;&gt;100%&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;animation-properties&quot;&gt;Animation Properties&lt;/h2&gt;
+
+&lt;p&gt;It has following properties:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;animation-name&lt;/li&gt;
+  &lt;li&gt;animation-duration&lt;/li&gt;
+  &lt;li&gt;animation-timing-function&lt;/li&gt;
+  &lt;li&gt;animation-delay&lt;/li&gt;
+  &lt;li&gt;animation-iteration-count&lt;/li&gt;
+  &lt;li&gt;animation-direction&lt;/li&gt;
+  &lt;li&gt;animation-fill-mode&lt;/li&gt;
+  &lt;li&gt;animation-play-state&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;animation-name&quot;&gt;animation-name&lt;/h3&gt;
+
+&lt;p&gt;The name of the animation, defined in the @keyframes.&lt;/p&gt;
+
+&lt;h3 id=&quot;animation-duration&quot;&gt;animation-duration&lt;/h3&gt;
+
+&lt;p&gt;The duration of the animation, in seconds (e.g., 5s) or milliseconds (e.g., 200ms).&lt;/p&gt;
+
+&lt;h3 id=&quot;animation-timing-function&quot;&gt;animation-timing-function&lt;/h3&gt;
+
+&lt;p&gt;The speed curve or pace of the animation:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Timing Function&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;linear&lt;/td&gt;
+      &lt;td&gt;The animation has the same speed from start to end&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ease&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Default value&lt;/strong&gt;. The animation has a slow start, then fast, before it ends slowly.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ease-in&lt;/td&gt;
+      &lt;td&gt;Start slowly and end fast.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ease-out&lt;/td&gt;
+      &lt;td&gt;Start more quickly than linear ones and end slowly. The opposite of ease-in.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ease-in-out&lt;/td&gt;
+      &lt;td&gt;Both a slow start and a slow end&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;initial&lt;/td&gt;
+      &lt;td&gt;Sets this property to its default value. So &lt;code class=&quot;highlighter-rouge&quot;&gt;ease&lt;/code&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;inherit&lt;/td&gt;
+      &lt;td&gt;Inherits this property from its parent element.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Check &lt;a href=&quot;https://developers.google.com/web/fundamentals/design-and-ui/animations/the-basics-of-easing?hl=en&quot;&gt;The basics of easing&lt;/a&gt; for details.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;animation-delay&quot;&gt;animation-delay&lt;/h3&gt;
+
+&lt;p&gt;It specifies when the animation will start. The value is defined in seconds (s) or milliseconds (mil).&lt;/p&gt;
+
+&lt;h3 id=&quot;animation-iteration-count&quot;&gt;animation-iteration-count&lt;/h3&gt;
+
+&lt;p&gt;It specifies the number of times that the animation will play. The possible values are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a specific number of iterations (default is 1)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;infinite&lt;/code&gt; - repeats forever&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;initial&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inherit&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;animation-direction&quot;&gt;animation-direction&lt;/h3&gt;
+
+&lt;p&gt;It specifies whether the animation should play forward, reverse, or in alternate cycles.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;normal&lt;/code&gt; - Default. On each cycle the animation resets to the beginning state (0%) and plays forward again (to 100%).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;reverse&lt;/code&gt; - On each cycle the animation resets to the end state (100%) and plays backwards (to 0%).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;alternate&lt;/code&gt; - On each odd cycle, the animation plays forward (0% to 100%). On each even cycle, the animation plays backwards (100% to 0%).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;alternate-reverse&lt;/code&gt; - On each odd cycle, the animation plays in reverse (100% to 0%). On each even cycle, the animation plays forward (0% or 100%).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;animation-fill-mode&quot;&gt;animation-fill-mode&lt;/h3&gt;
+
+&lt;p&gt;It specifies if the animation styles are visible before or after the animation plays.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;normal&lt;/code&gt; - Default. The animation does not apply any styles to the element, before or after the animation.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;forwards&lt;/code&gt; - After the animation is finished, the styles defined in the final keyframe (100%) are retained by the element.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;backwards&lt;/code&gt; - Before the animation (during the animation delay), the styles of the initial keyframe (0%) are applied to the element.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;both&lt;/code&gt; - &lt;code class=&quot;highlighter-rouge&quot;&gt;forwards&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;backwards&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;animation-play-state&quot;&gt;animation-play-state&lt;/h3&gt;
+
+&lt;p&gt;Two values: &lt;code class=&quot;highlighter-rouge&quot;&gt;running&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;paused&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;It specifies whether the animation is &lt;code class=&quot;highlighter-rouge&quot;&gt;playing&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;paused&lt;/code&gt;. &lt;strong&gt;Resuming a paused animation starts the animation where it was left off. But if pause an animation, the element style will return back to its origin.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:hover&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;animation-play-state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;paused&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;multiple-animations&quot;&gt;Multiple Animations&lt;/h2&gt;
+
+&lt;p&gt;Add multiple animations to a selector with comma:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animationA&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animationB&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;refs&quot;&gt;Refs&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.imooc.com/learn/33&quot;&gt;Imooc 十天精通CSS3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://robots.thoughtbot.com/css-animation-for-beginners#animation-iteration-count&quot;&gt;CSS Animation for Beginners&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp&quot;&gt;CSS3 animation-timing-function Property&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 22 Apr 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/css/2016/04/22/CSS-Animation.html</link>
+        <guid isPermaLink="true">http://localhost:4000/css/2016/04/22/CSS-Animation.html</guid>
+        
+        <category>css</category>
+        
+        
+        <category>CSS</category>
+        
+      </item>
+    
+  </channel>
+</rss>
