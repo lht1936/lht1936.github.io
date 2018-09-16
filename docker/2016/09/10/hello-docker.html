@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+    <title>在Mac OSX上安装docker并启动Oracle image</title>
+    <meta name="description"
+          content="##安装DockerDocker提供了在Mac，Linux，Windows上的安装包，直接下载安装即可，安装的时候都是图形化的方式，无需赘述。Mac Docker: https://download.docker.com/mac/stable/Docker.dmg">
+
+    <link rel="canonical" href="http://lht1936.github.io/docker/2016/09/10/hello-docker.html">
+    <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link href="https://cdn.bootcss.com/gitalk/1.2.2/gitalk.css" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="container">
+        <a id="site-header-brand" href="/" title="湘江鸿">
+            <span class="octicon octicon-mark-github"></span> 湘江鸿
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <a href="/"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Home">
+                Home
+            </a>
+            
+            <a href="/archives"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Archives">
+                Archives
+            </a>
+            
+            <a href="/bookmark"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Bookmark">
+                Bookmark
+            </a>
+            
+            <a href="/open-source"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Open-Source">
+                Open-Source
+            </a>
+            
+            <a href="/about"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="About">
+                About
+            </a>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="在Mac OSX上安装docker并启动Oracle image">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            <h1>在Mac OSX上安装docker并启动Oracle image</h1>
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2016/09/10
+                
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <p>##安装Docker<br />
+Docker提供了在Mac，Linux，Windows上的安装包，直接下载安装即可，安装的时候都是图形化的方式，无需赘述。<br />
+Mac Docker: https://download.docker.com/mac/stable/Docker.dmg</p>
+
+<p>##对Docker的理解<br />
+刚开始使用，建立一个对Docker实现机制的初步理解，对接下来的操作与学习有所帮助。<br />
+1. Docker本地程序在宿主机上启动一组进程，提供一个虚拟化的环境。Mac版本的Docker本地程序使用的虚拟化技术是hypervisor。<br />
+2. 提供docker，docker-compose客户端工具，对这个虚拟化基础镜像进行管理，目前基础镜像Dokcer官方使用的是Apline Linux，一个面想社区的Linux分支。<br />
+3. 在虚拟化Linux基础上，启动了Docker Engine，这个engine厉害了，可以管理很多容器，容器里运行各种各样的Image。<br />
+4. 所以，在不同的宿主机上，Docker需要提供3种本地程序，对本地环境进行虚拟化，当虚拟化完成以后，都是运行一样的基础镜像。<br />
+5. Docker Engine管理的各个Container更不用说了，统一的一套代码程序和机制，让各个开发环境无缝在多种宿主机运行，虚拟化可移植化，开发测试生产可以无缝对接。</p>
+
+<p>以上分析不一定对，因为刚开始学，只是自己的理解，后面会持续研究学习，纠正错误的地方。</p>
+
+<p>##Docker国内Registry<br />
+DaoCloud: http://www.daocloud.io/<br />
+因为GFW的原因，下载image会很慢，甚至无法完成下载，所以应该使用国内的镜像，daocloud提供对官方的镜像服务，还有自己的镜像:<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/daocloud-services.png" alt="" /></p>
+
+<p>将镜像地址添加Docker中<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/docker-agent-http-address" alt="" /></p>
+
+<p>使用国内镜像后，下载速度确实变快了，为了确实使用了镜像，首先查看下载进程的id：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/show-docker-process" alt="" /></p>
+
+<p>很明显，进程id为26323名为com.docker.slirp的进程正在下载。</p>
+
+<p>查看进程网络通信的目标ip地址：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/show-docker-foreign-address" alt="" /></p>
+
+<p>在ip.cn上一查就知道在国内咯:<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/show-ip-home" alt="" /></p>
+
+<p>##安装Oracle 11g Express Edition<br />
+执行docker pull nameless/oracle-xe-11g 下载oracle<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/docker-oracle-downloaded" alt="" /></p>
+
+<p>20分钟左右下载完毕</p>
+
+<p>##测试Oracle<br />
+考虑到Oracle可能需要较多内存，我把Docker最大内存加到4G了，谁叫Macbook Pro内存杠杠的呢～<br />
+启动oracle image<br />
+<code class="highlighter-rouge">sh
+docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g
+</code></p>
+
+<p>启动成功：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/run-docker-ubuntu-oracle-11g-xe" alt="" /></p>
+
+<p>再次查看内存，发现hyperkit的内存已经占用到2.67G了，这就是启动的容器，里面运行着刚刚下载的image，包括Ubuntu操作系统和Oracle数据库服务：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/ubuntu-oracle-memory-use" alt="" /></p>
+
+<p>SSH连接Ubuntu系统，用户名root，密码admin：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/connect-docker-ubuntu" alt="" /></p>
+
+<p>进入Ubuntu后，连接Oracle测试，用户名sys或者system，密码都是oracle<br />
+```sh<br />
+hostname: localhost  <br />
+port: 49161  <br />
+sid: xe  <br />
+username: sys/system  <br />
+password: oracle</p>
+
+<p>XE =<br />
+  (DESCRIPTION =<br />
+    (ADDRESS = (PROTOCOL = TCP)(HOST = f80c1ac48360)(PORT = 1521))<br />
+    (CONNECT_DATA =<br />
+      (SERVER = DEDICATED)<br />
+      (SERVICE_NAME = XE)<br />
+    )<br />
+  )<br />
+```</p>
+
+<p>有了上面的连接串，就可以用自己最熟悉的 pl/sql developer 来连接啦。</p>
+
+
+            <!-- copyright -->
+            <div>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://lht1936.github.io">湘江鸿的博客</a>）</strong>
+   </p>
+</div>
+            <!-- Comments -->
+            <div class="comment">
+                
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: '/docker/2016/09/10/hello-docker.html',
+            clientID: '2347868ee370ead4247e',
+            clientSecret: '4fc5fe85a6458851c4c46f7508ee72940dbb5801',
+            repo: 'lht1936.github.io',
+            owner: 'lht1936',
+            admin: ['lht1936'],
+            labels: ['gitment'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+        </div>
+        
+
+    </div>
+
+</article>
+
+        </div>
+
+    <footer class="container">
+
+    <div class="site-footer">
+
+        <div class="site-footer-icons">
+            <a target="_blank" href="https://weibo.com/u/1260208131">
+                微博
+            </a>
+            <a target="_blank" href="https://github.com/lht1936">
+                Github
+            </a>
+        </div>
+
+        <div class="scrolltop">
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+
+    </div>
+
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+
+    
+
+    <!---->
+
+</footer>
+
+
+    </body>
+
+</html>

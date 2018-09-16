@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+    <title>Spring源码导入eclipse</title>
+    <meta name="description"
+          content="##Spring源码包下载Spring各个版本的源码包可以在github这个页面下载，选择你想要研究的Spring版本，我下载了最新的release版本4.2.5。">
+
+    <link rel="canonical" href="http://lht1936.github.io/java/2016/02/27/import-spring-to-eclipse.html">
+    <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link href="https://cdn.bootcss.com/gitalk/1.2.2/gitalk.css" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="container">
+        <a id="site-header-brand" href="/" title="湘江鸿">
+            <span class="octicon octicon-mark-github"></span> 湘江鸿
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <a href="/"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Home">
+                Home
+            </a>
+            
+            <a href="/archives"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Archives">
+                Archives
+            </a>
+            
+            <a href="/bookmark"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Bookmark">
+                Bookmark
+            </a>
+            
+            <a href="/open-source"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Open-Source">
+                Open-Source
+            </a>
+            
+            <a href="/about"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="About">
+                About
+            </a>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="Spring源码导入eclipse">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            <h1>Spring源码导入eclipse</h1>
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2016/02/27
+                
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <p>##Spring源码包下载<br />
+Spring各个版本的源码包可以在github这个页面<a href="https://github.com/spring-projects/spring-framework/releases">下载</a>，选择你想要研究的Spring版本，我下载了最新的release版本4.2.5。</p>
+
+<p>##插件安装<br />
+执行Spring源码包根目录下的import-into-eclipse.sh可以生成eclipse相关的工程文件，执行后显示如下信息：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-1.png" alt="" /></p>
+
+<p>提示需要安装AJDT和groovy插件。</p>
+
+<p>1.安装AJDT插件<br />
+AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downloads/<br />
+目前的release版本只支持eclipse4.4，我使用的是eclipse4.5，在google上找到这个页面：http://dev.eclipse.org/mhonarc/lists/ajdt-dev/msg01651.html。<br />
+适用于eclipse4.5的dev版本：http://download.eclipse.org/tools/ajdt/45/dev/update。</p>
+
+<p>在eclipse中安装AJDT dev version for eclipse 4.5:<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-2.png" alt="" /></p>
+
+<p>install details:<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-3.png" alt="" /></p>
+
+<p>2.安装groovy插件<br />
+插件获取地址：https://github.com/groovy/groovy-eclipse/wiki<br />
+刚好最新能支持到eclipse4.5：http://dist.springsource.org/snapshot/GRECLIPSE/e4.5/<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-4.png" alt="" /></p>
+
+<p>##生成eclipse工程文件<br />
+最后执行import-into-eclipse.sh，请自备梯子，很多文件下载很慢，有vpn就快多了。</p>
+
+
+
+            <!-- copyright -->
+            <div>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://lht1936.github.io">湘江鸿的博客</a>）</strong>
+   </p>
+</div>
+            <!-- Comments -->
+            <div class="comment">
+                
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: '/java/2016/02/27/import-spring-to-eclipse.html',
+            clientID: '2347868ee370ead4247e',
+            clientSecret: '4fc5fe85a6458851c4c46f7508ee72940dbb5801',
+            repo: 'lht1936.github.io',
+            owner: 'lht1936',
+            admin: ['lht1936'],
+            labels: ['gitment'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+        </div>
+        
+
+    </div>
+
+</article>
+
+        </div>
+
+    <footer class="container">
+
+    <div class="site-footer">
+
+        <div class="site-footer-icons">
+            <a target="_blank" href="https://weibo.com/u/1260208131">
+                微博
+            </a>
+            <a target="_blank" href="https://github.com/lht1936">
+                Github
+            </a>
+        </div>
+
+        <div class="scrolltop">
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+
+    </div>
+
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+
+    
+
+    <!---->
+
+</footer>
+
+
+    </body>
+
+</html>

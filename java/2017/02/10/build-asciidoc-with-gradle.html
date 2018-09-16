@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+    <title>使用gradle对asciidoc文档进行编译</title>
+    <meta name="description"
+          content="最近在学习使用Elasticsearch，当然先从文档入手，但是它的文档只能在线看，对于我这种经常处于无wifi状态的人来说，是必须需要一个离线文档的。所以下载了源码包，里面包含了文档，都是asciidoc的文件格式，自己编译生成一个吧。">
+
+    <link rel="canonical" href="http://lht1936.github.io/java/2017/02/10/build-asciidoc-with-gradle.html">
+    <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link href="https://cdn.bootcss.com/gitalk/1.2.2/gitalk.css" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="container">
+        <a id="site-header-brand" href="/" title="湘江鸿">
+            <span class="octicon octicon-mark-github"></span> 湘江鸿
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <a href="/"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Home">
+                Home
+            </a>
+            
+            <a href="/archives"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Archives">
+                Archives
+            </a>
+            
+            <a href="/bookmark"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Bookmark">
+                Bookmark
+            </a>
+            
+            <a href="/open-source"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Open-Source">
+                Open-Source
+            </a>
+            
+            <a href="/about"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="About">
+                About
+            </a>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="使用gradle对asciidoc文档进行编译">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            <h1>使用gradle对asciidoc文档进行编译</h1>
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2017/02/10
+                
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <p>最近在学习使用Elasticsearch，当然先从文档入手，但是它的文档只能在线看，对于我这种经常处于无wifi状态的人来说，<br />
+是必须需要一个离线文档的。所以下载了源码包，里面包含了文档，都是asciidoc的文件格式，自己编译生成一个吧。</p>
+
+<p>asciidoc也是类似于Markdown的一种内容编写格式，自己google哈。</p>
+
+<p>##编译步骤<br />
+1. 使用gradle插件进行编译<br />
+因为整个Elasticsearch项目是用gradle来编译生成的，而且源码包的docs目录下也有build.gradle文件，就想到肯定是用<br />
+gradle来进行编译，但是在源码根目录执行gradle assemble并不能编译asciidoc文件，没有任何文档生成。google后才知<br />
+道需要专门的文本解析器asciidoctor，并且它提供了gralde的插件。<br />
+2. 安装gradle asciidoctor插件<br />
+在docs目录将build.gradle重命名进行备份，新建文件build.gradle，输入以下内容：<br />
+```sh<br />
+buildscript {<br />
+        repositories {<br />
+                jcenter()<br />
+        }</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    dependencies {
+            classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.0'
+    }
+</code></pre>
+</div>
+
+<p>}</p>
+
+<p>apply plugin: ‘org.asciidoctor.gradle.asciidoctor’</p>
+
+<p>asciidoctor {<br />
+        logDocuments = true<br />
+        sourceDir = file(‘reference’)<br />
+        outputDir = file(‘build/docs123’)<br />
+}<br />
+```<br />
+sourceDir表示要编译的文档目录，它是一个相对目录，所以上面就表示要编译的文档在docs的reference目录下，asciidoctor会递归处理子目录。</p>
+
+<p>如果docs目录下有多个子目录，你可能会想直接用.来表示当前目录，然后处理docs下的所有文档目录，但是使用这种方法，<br />
+编译后会报以下错误：<br />
+<code class="highlighter-rouge">java
+Caused by: java.io.FileNotFoundException: /Users/hongtinglin/Java/elasticsearch-5.2.0-src/docs/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/.DS_Store (File name too long)
+	at org.asciidoctor.gradle.AsciidoctorTask.processSourceDir(AsciidoctorTask.groovy:224)
+</code></p>
+
+<p>暂时没有想到其它办法，就一个个目录编译过去吧。</p>
+
+
+            <!-- copyright -->
+            <div>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://lht1936.github.io">湘江鸿的博客</a>）</strong>
+   </p>
+</div>
+            <!-- Comments -->
+            <div class="comment">
+                
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: '/java/2017/02/10/build-asciidoc-with-gradle.html',
+            clientID: '2347868ee370ead4247e',
+            clientSecret: '4fc5fe85a6458851c4c46f7508ee72940dbb5801',
+            repo: 'lht1936.github.io',
+            owner: 'lht1936',
+            admin: ['lht1936'],
+            labels: ['gitment'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+        </div>
+        
+
+    </div>
+
+</article>
+
+        </div>
+
+    <footer class="container">
+
+    <div class="site-footer">
+
+        <div class="site-footer-icons">
+            <a target="_blank" href="https://weibo.com/u/1260208131">
+                微博
+            </a>
+            <a target="_blank" href="https://github.com/lht1936">
+                Github
+            </a>
+        </div>
+
+        <div class="scrolltop">
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+
+    </div>
+
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+
+    
+
+    <!---->
+
+</footer>
+
+
+    </body>
+
+</html>
