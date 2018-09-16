@@ -11,7 +11,7 @@
 
     <title>MacOS X eclipse angular插件安装与配置</title>
     <meta name="description"
-          content="##在eclipse中安装angular插件1.插件安装地址为http://oss.opensagres.fr/angularjs-eclipse/1.1.0/最新的安装地址在这里。">
+          content="在eclipse中安装angular插件1.插件安装地址为http://oss.opensagres.fr/angularjs-eclipse/1.1.0/最新的安装地址在这里。">
 
     <link rel="canonical" href="http://lht1936.github.io/%E5%89%8D%E7%AB%AF/2016/02/24/angularjs-getting-started.html">
     <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
@@ -121,8 +121,8 @@
         
         <div class="col-md-9 markdown-body">
 
-            <p>##在eclipse中安装angular插件<br />
-1.插件安装地址为http://oss.opensagres.fr/angularjs-eclipse/1.1.0/<br />
+            <h2 id="eclipseangular">在eclipse中安装angular插件</h2>
+<p>1.插件安装地址为http://oss.opensagres.fr/angularjs-eclipse/1.1.0/<br />
 最新的安装地址在<a href="https://github.com/angelozerr/angularjs-eclipse/wiki/Installation-Update-Site">这里</a>。</p>
 
 <p>2.在eclipse中选择help-&gt;install new software，输入插件安装地址，选择所有的插件：<br />
@@ -131,11 +131,13 @@
 <p>3.安装插件预览：<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/auglar-getting-started-2.png" alt="" /></p>
 
-<p>##插件配置<br />
-1. 全局配置<br />
+<h2 id="section">插件配置</h2>
+<ol>
+  <li>全局配置<br />
 由于AngularJS插件使用了JavaScript分析引擎tern.js（使用JavaScript编写），因此需要node.js来执行这个引擎。<br />
 选择eclipse/偏好设置，由于JEE版本的eclipse包含了JSDT，tern配置节点在JavaScript节点之下：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-3.png" alt="" /></p>
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-3.png" alt="" /></li>
+</ol>
 
 <p>保持默认配置即可，默认使用的是安装插件时已经装好的node.js。<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-4.png" alt="" /></p>
@@ -158,27 +160,28 @@
 <p>打开项目属性，可以看到script paths 已经自动加入了angular.js<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-9.png" alt="" /></p>
 
-<h2 id="section">检查验证功能是否有效</h2>
-<p>新建一个html文件，输入以下简单angular代码：<br />
-```html<br />
-&lt;!DOCTYPE html&gt;</p>
-<html>
-<script src="js/angular.js"></script>
-<body>
+<h2 id="section-1">检查验证功能是否有效</h2>
+<p>新建一个html文件，输入以下简单angular代码：</p>
 
-<div ng-app="">
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/angular.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">""</span><span class="nt">&gt;</span>
  
-<p>Input something in the input box:</p>
-<p>Name : <input type="text" ng-model="name" placeholder="Enter name here" /></p>
-<h1>Hello </h1>
+<span class="nt">&lt;p&gt;</span>Input something in the input box:<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>Name : <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"name"</span> <span class="na">placeholder=</span><span class="s">"Enter name here"</span><span class="nt">&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;h1&gt;</span>Hello <span class="nt">&lt;/h1&gt;</span>
 
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
 </div>
 
-</body>
-</html>
-
-<p>```<br />
-可以看到ng-app还是带黄色下划线警告：<br />
+<p>可以看到ng-app还是带黄色下划线警告：<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-10.png" alt="" /></p>
 
 <p>我们打开项目属性，在Validation节点下做如下配置。<br />
@@ -188,11 +191,11 @@
 <p>关闭已经打开的html文件，再次打开，可以看到警告已经消失：<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-12.png" alt="" /></p>
 
-<p>##代码提示功能<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-13.png" alt="" /></p>
+<h2 id="section-2">代码提示功能</h2>
+<p><img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-13.png" alt="" /></p>
 
-<p>##部署应用<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-14.png" alt="" /></p>
+<h2 id="section-3">部署应用</h2>
+<p><img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-14.png" alt="" /></p>
 
 
 

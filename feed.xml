@@ -5,8 +5,8 @@
     <description>记录湘江鸿技术与生活的点点滴滴</description>
     <link>http://lht1936.github.io/</link>
     <atom:link href="http://lht1936.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 16 Sep 2018 16:14:49 +0800</pubDate>
-    <lastBuildDate>Sun, 16 Sep 2018 16:14:49 +0800</lastBuildDate>
+    <pubDate>Sun, 16 Sep 2018 16:42:54 +0800</pubDate>
+    <lastBuildDate>Sun, 16 Sep 2018 16:42:54 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -16,43 +16,52 @@
 
 &lt;p&gt;asciidoc也是类似于Markdown的一种内容编写格式，自己google哈。&lt;/p&gt;
 
-&lt;p&gt;##编译步骤&lt;br /&gt;
-1. 使用gradle插件进行编译&lt;br /&gt;
+&lt;h2 id=&quot;section&quot;&gt;编译步骤&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用gradle插件进行编译&lt;br /&gt;
 因为整个Elasticsearch项目是用gradle来编译生成的，而且源码包的docs目录下也有build.gradle文件，就想到肯定是用&lt;br /&gt;
 gradle来进行编译，但是在源码根目录执行gradle assemble并不能编译asciidoc文件，没有任何文档生成。google后才知&lt;br /&gt;
-道需要专门的文本解析器asciidoctor，并且它提供了gralde的插件。&lt;br /&gt;
-2. 安装gradle asciidoctor插件&lt;br /&gt;
-在docs目录将build.gradle重命名进行备份，新建文件build.gradle，输入以下内容：&lt;br /&gt;
-```sh&lt;br /&gt;
-buildscript {&lt;br /&gt;
-        repositories {&lt;br /&gt;
-                jcenter()&lt;br /&gt;
-        }&lt;/p&gt;
+道需要专门的文本解析器asciidoctor，并且它提供了gralde的插件。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装gradle asciidoctor插件&lt;br /&gt;
+在docs目录将build.gradle重命名进行备份，新建文件build.gradle，输入以下内容：&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    dependencies {
-            classpath &#39;org.asciidoctor:asciidoctor-gradle-plugin:1.5.0&#39;
-    }
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;buildscript &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        repositories &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                jcenter&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        dependencies &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                classpath &lt;span class=&quot;s1&quot;&gt;&#39;org.asciidoctor:asciidoctor-gradle-plugin:1.5.0&#39;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+apply plugin: &lt;span class=&quot;s1&quot;&gt;&#39;org.asciidoctor.gradle.asciidoctor&#39;&lt;/span&gt;
+
+asciidoctor &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        logDocuments &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true
+        &lt;/span&gt;sourceDir &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; file&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;reference&#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        outputDir &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; file&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;build/docs123&#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;apply plugin: ‘org.asciidoctor.gradle.asciidoctor’&lt;/p&gt;
-
-&lt;p&gt;asciidoctor {&lt;br /&gt;
-        logDocuments = true&lt;br /&gt;
-        sourceDir = file(‘reference’)&lt;br /&gt;
-        outputDir = file(‘build/docs123’)&lt;br /&gt;
-}&lt;br /&gt;
-```&lt;br /&gt;
-sourceDir表示要编译的文档目录，它是一个相对目录，所以上面就表示要编译的文档在docs的reference目录下，asciidoctor会递归处理子目录。&lt;/p&gt;
+&lt;p&gt;sourceDir表示要编译的文档目录，它是一个相对目录，所以上面就表示要编译的文档在docs的reference目录下，asciidoctor会递归处理子目录。&lt;/p&gt;
 
 &lt;p&gt;如果docs目录下有多个子目录，你可能会想直接用.来表示当前目录，然后处理docs下的所有文档目录，但是使用这种方法，&lt;br /&gt;
-编译后会报以下错误：&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-Caused by: java.io.FileNotFoundException: /Users/hongtinglin/Java/elasticsearch-5.2.0-src/docs/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/.DS_Store (File name too long)
-	at org.asciidoctor.gradle.AsciidoctorTask.processSourceDir(AsciidoctorTask.groovy:224)
-&lt;/code&gt;&lt;/p&gt;
+编译后会报以下错误：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Caused&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;by:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;FileNotFoundException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hongtinglin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elasticsearch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;5.2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs123&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DS_Store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;too&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asciidoctor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AsciidoctorTask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;processSourceDir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AsciidoctorTask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;groovy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;224&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;暂时没有想到其它办法，就一个个目录编译过去吧。&lt;/p&gt;
 </description>
@@ -67,22 +76,38 @@ Caused by: java.io.FileNotFoundException: /Users/hongtinglin/Java/elasticsearch-
     
       <item>
         <title>在Mac OSX上安装docker并启动Oracle image</title>
-        <description>&lt;p&gt;##安装Docker&lt;br /&gt;
-Docker提供了在Mac，Linux，Windows上的安装包，直接下载安装即可，安装的时候都是图形化的方式，无需赘述。&lt;br /&gt;
+        <description>&lt;h2 id=&quot;docker&quot;&gt;安装Docker&lt;/h2&gt;
+
+&lt;p&gt;Docker提供了在Mac，Linux，Windows上的安装包，直接下载安装即可，安装的时候都是图形化的方式，无需赘述。&lt;br /&gt;
 Mac Docker: https://download.docker.com/mac/stable/Docker.dmg&lt;/p&gt;
 
-&lt;p&gt;##对Docker的理解&lt;br /&gt;
-刚开始使用，建立一个对Docker实现机制的初步理解，对接下来的操作与学习有所帮助。&lt;br /&gt;
-1. Docker本地程序在宿主机上启动一组进程，提供一个虚拟化的环境。Mac版本的Docker本地程序使用的虚拟化技术是hypervisor。&lt;br /&gt;
-2. 提供docker，docker-compose客户端工具，对这个虚拟化基础镜像进行管理，目前基础镜像Dokcer官方使用的是Apline Linux，一个面想社区的Linux分支。&lt;br /&gt;
-3. 在虚拟化Linux基础上，启动了Docker Engine，这个engine厉害了，可以管理很多容器，容器里运行各种各样的Image。&lt;br /&gt;
-4. 所以，在不同的宿主机上，Docker需要提供3种本地程序，对本地环境进行虚拟化，当虚拟化完成以后，都是运行一样的基础镜像。&lt;br /&gt;
-5. Docker Engine管理的各个Container更不用说了，统一的一套代码程序和机制，让各个开发环境无缝在多种宿主机运行，虚拟化可移植化，开发测试生产可以无缝对接。&lt;/p&gt;
+&lt;h2 id=&quot;docker-1&quot;&gt;对Docker的理解&lt;/h2&gt;
+
+&lt;p&gt;刚开始使用，建立一个对Docker实现机制的初步理解，对接下来的操作与学习有所帮助。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Docker本地程序在宿主机上启动一组进程，提供一个虚拟化的环境。Mac版本的Docker本地程序使用的虚拟化技术是hypervisor。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;提供docker，docker-compose客户端工具，对这个虚拟化基础镜像进行管理，目前基础镜像Dokcer官方使用的是Apline Linux，一个面想社区的Linux分支。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在虚拟化Linux基础上，启动了Docker Engine，这个engine厉害了，可以管理很多容器，容器里运行各种各样的Image。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;所以，在不同的宿主机上，Docker需要提供3种本地程序，对本地环境进行虚拟化，当虚拟化完成以后，都是运行一样的基础镜像。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Docker Engine管理的各个Container更不用说了，统一的一套代码程序和机制，让各个开发环境无缝在多种宿主机运行，虚拟化可移植化，开发测试生产可以无缝对接。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;以上分析不一定对，因为刚开始学，只是自己的理解，后面会持续研究学习，纠正错误的地方。&lt;/p&gt;
 
-&lt;p&gt;##Docker国内Registry&lt;br /&gt;
-DaoCloud: http://www.daocloud.io/&lt;br /&gt;
+&lt;h2 id=&quot;dockerregistry&quot;&gt;Docker国内Registry&lt;/h2&gt;
+
+&lt;p&gt;DaoCloud: http://www.daocloud.io/&lt;br /&gt;
 因为GFW的原因，下载image会很慢，甚至无法完成下载，所以应该使用国内的镜像，daocloud提供对官方的镜像服务，还有自己的镜像:&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/daocloud-services.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -100,18 +125,20 @@ DaoCloud: http://www.daocloud.io/&lt;br /&gt;
 &lt;p&gt;在ip.cn上一查就知道在国内咯:&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/show-ip-home&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;##安装Oracle 11g Express Edition&lt;br /&gt;
-执行docker pull nameless/oracle-xe-11g 下载oracle&lt;br /&gt;
+&lt;h2 id=&quot;oracle-11g-express-edition&quot;&gt;安装Oracle 11g Express Edition&lt;/h2&gt;
+&lt;p&gt;执行docker pull nameless/oracle-xe-11g 下载oracle&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/docker-oracle-downloaded&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;20分钟左右下载完毕&lt;/p&gt;
 
-&lt;p&gt;##测试Oracle&lt;br /&gt;
-考虑到Oracle可能需要较多内存，我把Docker最大内存加到4G了，谁叫Macbook Pro内存杠杠的呢～&lt;br /&gt;
-启动oracle image&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;sh
-docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g
-&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;oracle&quot;&gt;测试Oracle&lt;/h2&gt;
+
+&lt;p&gt;考虑到Oracle可能需要较多内存，我把Docker最大内存加到4G了，谁叫Macbook Pro内存杠杠的呢～&lt;br /&gt;
+启动oracle image&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;启动成功：&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/run-docker-ubuntu-oracle-11g-xe&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -122,23 +149,24 @@ docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g
 &lt;p&gt;SSH连接Ubuntu系统，用户名root，密码admin：&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/connect-docker-ubuntu&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;进入Ubuntu后，连接Oracle测试，用户名sys或者system，密码都是oracle&lt;br /&gt;
-```sh&lt;br /&gt;
-hostname: localhost  &lt;br /&gt;
-port: 49161  &lt;br /&gt;
-sid: xe  &lt;br /&gt;
-username: sys/system  &lt;br /&gt;
-password: oracle&lt;/p&gt;
+&lt;p&gt;进入Ubuntu后，连接Oracle测试，用户名sys或者system，密码都是oracle&lt;/p&gt;
 
-&lt;p&gt;XE =&lt;br /&gt;
-  (DESCRIPTION =&lt;br /&gt;
-    (ADDRESS = (PROTOCOL = TCP)(HOST = f80c1ac48360)(PORT = 1521))&lt;br /&gt;
-    (CONNECT_DATA =&lt;br /&gt;
-      (SERVER = DEDICATED)&lt;br /&gt;
-      (SERVICE_NAME = XE)&lt;br /&gt;
-    )&lt;br /&gt;
-  )&lt;br /&gt;
-```&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hostname: localhost  
+port: 49161  
+sid: xe  
+username: sys/system  
+password: oracle 
+
+XE &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;DESCRIPTION &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ADDRESS &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;PROTOCOL &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; TCP&lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;HOST &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; f80c1ac48360&lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;PORT &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1521&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CONNECT_DATA &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SERVER &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; DEDICATED&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SERVICE_NAME &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; XE&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;有了上面的连接串，就可以用自己最熟悉的 pl/sql developer 来连接啦。&lt;/p&gt;
 </description>
@@ -170,36 +198,42 @@ password: oracle&lt;/p&gt;
     
       <item>
         <title>将codingiOS开源项目导入xCode并运行</title>
-        <description>&lt;p&gt;##安装CocoaPods&lt;br /&gt;
-CodingiOS项目使用业界标准CocoaPods管理依赖。&lt;br /&gt;
-执行以下命令检查是否安装了CocoaPods:&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-pod --version
-&lt;/code&gt;&lt;br /&gt;
-如果未安装，执行以下命令进行安装：&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-sudo gem install cocoapods
-&lt;/code&gt;&lt;br /&gt;
-CocoaPods使用ruby编写，所以使用gem命令进行安装。&lt;/p&gt;
+        <description>&lt;h2 id=&quot;cocoapods&quot;&gt;安装CocoaPods&lt;/h2&gt;
+&lt;p&gt;CodingiOS项目使用业界标准CocoaPods管理依赖。&lt;br /&gt;
+执行以下命令检查是否安装了CocoaPods:&lt;/p&gt;
 
-&lt;p&gt;##下载CodingiOS源码&lt;br /&gt;
-使用git下载：&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-git clone git://git.coding.net/coding/Coding-iOS.git
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod --version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;##安装依赖库并运行&lt;br /&gt;
-进入源码下载目录，执行源码自带的bootstrap命令，其包含的执行内容包括：&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-#!/bin/bash
-CMD_PATH=`dirname $0`
-cd $CMD_PATH
+&lt;p&gt;如果未安装，执行以下命令进行安装：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo gem install cocoapods
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;CocoaPods使用ruby编写，所以使用gem命令进行安装。&lt;/p&gt;
+
+&lt;h2 id=&quot;codingios&quot;&gt;下载CodingiOS源码&lt;/h2&gt;
+&lt;p&gt;使用git下载：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone git://git.coding.net/coding/Coding-iOS.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;安装依赖库并运行&lt;/h2&gt;
+&lt;p&gt;进入源码下载目录，执行源码自带的bootstrap命令，其包含的执行内容包括：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;CMD_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dirname &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$CMD_PATH&lt;/span&gt;
 cp Coding_iOS/Coding_iOS-Prefix.pch.example Coding_iOS/Coding_iOS-Prefix.pch
 git submodule update --init --recursive
 pod install
 open Coding_iOS.xcworkspace
-exit 0
-&lt;/code&gt;&lt;/p&gt;
+&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;pod install即为安装依赖库，这个过程比较慢，而且需要翻墙，否则下载不下来。&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/import-codingios-to-xcode-1.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
@@ -225,8 +259,8 @@ exit 0
 &lt;a href=&quot;http://stackoverflow.com/questions/19717625/download-ios-sdk-7-0-documentation-for-offline-install&quot;&gt;Download iOS SDK 7.0 documentation for offline install&lt;/a&gt;&lt;br /&gt;
 用wireshark获取文档的下载地址，然后使用其他工具直接下载，更快。&lt;/p&gt;
 
-&lt;p&gt;##Wireshark&lt;br /&gt;
-顺便学学wireshark，官方网站很多资料，比如：&lt;br /&gt;
+&lt;h2 id=&quot;wireshark&quot;&gt;Wireshark&lt;/h2&gt;
+&lt;p&gt;顺便学学wireshark，官方网站很多资料，比如：&lt;br /&gt;
 1.&lt;a href=&quot;https://www.youtube.com/playlist?list=PLnKJHZhW_BuCPcIg6Ja2boDeHIRwoHMT-&quot;&gt;youtube视频&lt;/a&gt;&lt;br /&gt;
 2.wireshark还会跟Apple一样搞活动，在每年6月份，名字叫&lt;a href=&quot;https://sharkfest.wireshark.org/index.html&quot;&gt;SharkFest&lt;/a&gt;，这是他们从08年到15年的历史纪录：&lt;br /&gt;
   * &lt;a href=&quot;http://sharkfest.wireshark.org/sf15.html&quot;&gt;SharkFest’15&lt;/a&gt;&lt;br /&gt;
@@ -243,37 +277,38 @@ exit 0
   * PDF: &lt;a href=&quot;https://www.wireshark.org/download/docs/user-guide-us.pdf&quot;&gt;US&lt;/a&gt; or &lt;a href=&quot;https://www.wireshark.org/download/docs/user-guide-a4.pdf&quot;&gt;A4&lt;/a&gt;&lt;br /&gt;
 4.Wireshark还有很多书籍介绍的。&lt;/p&gt;
 
-&lt;p&gt;##使用Wireshark嗅探&lt;br /&gt;
-1.首先在活动监视器中找到Xcode的进程id，然后在Xcode中启动下载&lt;br /&gt;
+&lt;h2 id=&quot;wireshark-1&quot;&gt;使用Wireshark嗅探&lt;/h2&gt;
+&lt;p&gt;1.首先在活动监视器中找到Xcode的进程id，然后在Xcode中启动下载&lt;br /&gt;
 2.通过lsof -i | grep pid 的方式，找到Xcode所使用的下载端口号&lt;br /&gt;
 3.在Wireshark中通过tcp.port == [port]的方式过滤出下载的tcp网络包&lt;br /&gt;
 4.在包内容中寻找下载地址，但是发现被加密了。。&lt;/p&gt;
 
 &lt;p&gt;此方法失败。。&lt;/p&gt;
 
-&lt;p&gt;##apple文档链接&lt;br /&gt;
-最后还是使用这个文件中的地址来进行下载。。&lt;br /&gt;
+&lt;h2 id=&quot;apple&quot;&gt;apple文档链接&lt;/h2&gt;
+&lt;p&gt;最后还是使用这个文件中的地址来进行下载。。&lt;br /&gt;
 &lt;a href=&quot;https://developer.apple.com/library/downloads/docset-index.dvtdownloadableindex&quot;&gt;https://developer.apple.com/library/downloads/docset-index.dvtdownloadableindex&lt;/a&gt;&lt;br /&gt;
 从这个xml文件中搜索你要的版本对应的文档，比如我要下载iOS9.3的，直接搜iOS9.3，可以找到这个版本对应的iOS文档地址为：&lt;br /&gt;
 https://devimages.apple.com.edgekey.net/docsets/20160321/031-52212-A.dmg&lt;br /&gt;
 虽然可以直接使用这个地址下载，但速度会很慢，将edgekey.net去掉，使用apple.com站点下载即可提高速度。&lt;br /&gt;
 小提示：请使用百度离线下载，离线下载完成后在从百度云下载，很快！！&lt;/p&gt;
 
-&lt;p&gt;##安装dmg文件&lt;br /&gt;
-参考以下链接,&lt;strong&gt;亲测有效哈&lt;/strong&gt;：&lt;br /&gt;
+&lt;h2 id=&quot;dmg&quot;&gt;安装dmg文件&lt;/h2&gt;
+&lt;p&gt;参考以下链接,&lt;strong&gt;亲测有效哈&lt;/strong&gt;：&lt;br /&gt;
 http://stackoverflow.com/questions/29443681/how-to-install-xcode-documentation-by-dmg-file&lt;br /&gt;
 主要是两点：&lt;br /&gt;
 1.Xcode下载完成的目录为~/Library/Caches/com.apple.dt.Xcode/Downloads/&lt;br /&gt;
 2.文件命名规则为”identifier string” + “-“ + “version string” + “.dmg”&lt;br /&gt;
 例如iOS 9.3的文件名：com.apple.adc.documentation.iOS-93.5.dmg&lt;/p&gt;
 
-&lt;p&gt;##Xcode安装或升级&lt;br /&gt;
-如果需要安装Xcode，请去开发者中心登录下载，在app store真是太慢了！！&lt;br /&gt;
+&lt;h2 id=&quot;xcode&quot;&gt;Xcode安装或升级&lt;/h2&gt;
+&lt;p&gt;如果需要安装Xcode，请去开发者中心登录下载，在app store真是太慢了！！&lt;br /&gt;
 链接：https://developer.apple.com/downloads/&lt;br /&gt;
-使用以下命令验证安装的Xcode来源:&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-spctl --assess --verbose /Applications/Xcode.app
-&lt;/code&gt;&lt;/p&gt;
+使用以下命令验证安装的Xcode来源:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;spctl --assess --verbose /Applications/Xcode.app
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;下载Xcode 7.3，里面自带ios simulator 9.3，所以sdk不用另外再下载，除非需要其他版本。&lt;br /&gt;
 文档还是要另外下载安装的。&lt;/p&gt;
@@ -290,11 +325,11 @@ spctl --assess --verbose /Applications/Xcode.app
     
       <item>
         <title>Spring源码导入eclipse</title>
-        <description>&lt;p&gt;##Spring源码包下载&lt;br /&gt;
-Spring各个版本的源码包可以在github这个页面&lt;a href=&quot;https://github.com/spring-projects/spring-framework/releases&quot;&gt;下载&lt;/a&gt;，选择你想要研究的Spring版本，我下载了最新的release版本4.2.5。&lt;/p&gt;
+        <description>&lt;h2 id=&quot;spring&quot;&gt;Spring源码包下载&lt;/h2&gt;
+&lt;p&gt;Spring各个版本的源码包可以在github这个页面&lt;a href=&quot;https://github.com/spring-projects/spring-framework/releases&quot;&gt;下载&lt;/a&gt;，选择你想要研究的Spring版本，我下载了最新的release版本4.2.5。&lt;/p&gt;
 
-&lt;p&gt;##插件安装&lt;br /&gt;
-执行Spring源码包根目录下的import-into-eclipse.sh可以生成eclipse相关的工程文件，执行后显示如下信息：&lt;br /&gt;
+&lt;h2 id=&quot;section&quot;&gt;插件安装&lt;/h2&gt;
+&lt;p&gt;执行Spring源码包根目录下的import-into-eclipse.sh可以生成eclipse相关的工程文件，执行后显示如下信息：&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;提示需要安装AJDT和groovy插件。&lt;/p&gt;
@@ -315,8 +350,8 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
 刚好最新能支持到eclipse4.5：http://dist.springsource.org/snapshot/GRECLIPSE/e4.5/&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;##生成eclipse工程文件&lt;br /&gt;
-最后执行import-into-eclipse.sh，请自备梯子，很多文件下载很慢，有vpn就快多了。&lt;/p&gt;
+&lt;h2 id=&quot;eclipse&quot;&gt;生成eclipse工程文件&lt;/h2&gt;
+&lt;p&gt;最后执行import-into-eclipse.sh，请自备梯子，很多文件下载很慢，有vpn就快多了。&lt;/p&gt;
 
 </description>
         <pubDate>Sat, 27 Feb 2016 00:00:00 +0800</pubDate>
@@ -330,8 +365,8 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
     
       <item>
         <title>MacOS X eclipse angular插件安装与配置</title>
-        <description>&lt;p&gt;##在eclipse中安装angular插件&lt;br /&gt;
-1.插件安装地址为http://oss.opensagres.fr/angularjs-eclipse/1.1.0/&lt;br /&gt;
+        <description>&lt;h2 id=&quot;eclipseangular&quot;&gt;在eclipse中安装angular插件&lt;/h2&gt;
+&lt;p&gt;1.插件安装地址为http://oss.opensagres.fr/angularjs-eclipse/1.1.0/&lt;br /&gt;
 最新的安装地址在&lt;a href=&quot;https://github.com/angelozerr/angularjs-eclipse/wiki/Installation-Update-Site&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;2.在eclipse中选择help-&amp;gt;install new software，输入插件安装地址，选择所有的插件：&lt;br /&gt;
@@ -340,11 +375,13 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
 &lt;p&gt;3.安装插件预览：&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/auglar-getting-started-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;##插件配置&lt;br /&gt;
-1. 全局配置&lt;br /&gt;
+&lt;h2 id=&quot;section&quot;&gt;插件配置&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;全局配置&lt;br /&gt;
 由于AngularJS插件使用了JavaScript分析引擎tern.js（使用JavaScript编写），因此需要node.js来执行这个引擎。&lt;br /&gt;
 选择eclipse/偏好设置，由于JEE版本的eclipse包含了JSDT，tern配置节点在JavaScript节点之下：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-3.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;保持默认配置即可，默认使用的是安装插件时已经装好的node.js。&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -367,27 +404,28 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
 &lt;p&gt;打开项目属性，可以看到script paths 已经自动加入了angular.js&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;检查验证功能是否有效&lt;/h2&gt;
-&lt;p&gt;新建一个html文件，输入以下简单angular代码：&lt;br /&gt;
-```html&lt;br /&gt;
-&amp;lt;!DOCTYPE html&amp;gt;&lt;/p&gt;
-&lt;html&gt;
-&lt;script src=&quot;js/angular.js&quot;&gt;&lt;/script&gt;
-&lt;body&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;检查验证功能是否有效&lt;/h2&gt;
+&lt;p&gt;新建一个html文件，输入以下简单angular代码：&lt;/p&gt;
 
-&lt;div ng-app=&quot;&quot;&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;js/angular.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ng-app=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
  
-&lt;p&gt;Input something in the input box:&lt;/p&gt;
-&lt;p&gt;Name : &lt;input type=&quot;text&quot; ng-model=&quot;name&quot; placeholder=&quot;Enter name here&quot; /&gt;&lt;/p&gt;
-&lt;h1&gt;Hello &lt;/h1&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Input something in the input box:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Name : &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ng-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Enter name here&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Hello &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
 
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;/body&gt;
-&lt;/html&gt;
-
-&lt;p&gt;```&lt;br /&gt;
-可以看到ng-app还是带黄色下划线警告：&lt;br /&gt;
+&lt;p&gt;可以看到ng-app还是带黄色下划线警告：&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;我们打开项目属性，在Validation节点下做如下配置。&lt;br /&gt;
@@ -397,11 +435,11 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
 &lt;p&gt;关闭已经打开的html文件，再次打开，可以看到警告已经消失：&lt;br /&gt;
 &lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-12.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;##代码提示功能&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;代码提示功能&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;##部署应用&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;部署应用&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 24 Feb 2016 00:00:00 +0800</pubDate>
@@ -415,26 +453,27 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
     
       <item>
         <title>使用Python引用类型的注意事项</title>
-        <description>&lt;p&gt;##Python引用类型的使用&lt;br /&gt;
-在Python中，存在引用类型，当把引用类型加入到集合中，需要小心，否则集合中的多个元素可能会指向内存中同一地址的内容，这样会导致当你修改集合中某一个元素时，另一个元素也随之更改，防不胜防。&lt;br /&gt;
-例如：&lt;br /&gt;
-```python&lt;br /&gt;
-tmp = [‘a’, ‘b’]&lt;br /&gt;
-myDict = {}&lt;/p&gt;
+        <description>&lt;h2 id=&quot;python&quot;&gt;Python引用类型的使用&lt;/h2&gt;
+&lt;p&gt;在Python中，存在引用类型，当把引用类型加入到集合中，需要小心，否则集合中的多个元素可能会指向内存中同一地址的内容，这样会导致当你修改集合中某一个元素时，另一个元素也随之更改，防不胜防。&lt;br /&gt;
+例如：&lt;/p&gt;
 
-&lt;p&gt;myVar1 = tmp&lt;br /&gt;
-myVar2 = tmp&lt;br /&gt;
-myDict[‘key1’] = myVar1&lt;br /&gt;
-myDict[‘key2’] = myVar2&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;a&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;b&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myDict&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
 
-&lt;p&gt;myDict[‘key1’].extend([‘c’])&lt;/p&gt;
+&lt;span class=&quot;n&quot;&gt;myVar1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myVar2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myDict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;key1&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myVar1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myDict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;key2&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myVar2&lt;/span&gt;
 
-&lt;p&gt;print(str(myDict))&lt;/p&gt;
+&lt;span class=&quot;n&quot;&gt;myDict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;key1&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;c&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 
-&lt;p&gt;输出：&lt;br /&gt;
-{‘key2’: [‘a’, ‘b’, ‘c’], ‘key1’: [‘a’, ‘b’, ‘c’]}&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myDict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;span class=&quot;err&quot;&gt;输出：&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;key2&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;a&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;b&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;c&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;key1&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&#39;a&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;b&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&#39;c&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 </description>
         <pubDate>Tue, 26 Jan 2016 00:00:00 +0800</pubDate>
@@ -448,27 +487,28 @@ myDict[‘key2’] = myVar2&lt;/p&gt;
     
       <item>
         <title>The Swift Programming Language reading notes</title>
-        <description>&lt;p&gt;###1. for循环的范围，用..会报错，只能用…&lt;br /&gt;
-```swift&lt;br /&gt;
-//Operator is not a known binary operator&lt;br /&gt;
-//Use of unresolved identifier ‘..’&lt;br /&gt;
-var firstForLoop = 0&lt;br /&gt;
-for i in 0..3{&lt;br /&gt;
-    firstForLoop += i&lt;br /&gt;
-}&lt;br /&gt;
-firstForLoop&lt;/p&gt;
+        <description>&lt;h3 id=&quot;for&quot;&gt;1. for循环的范围，用..会报错，只能用…&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-###2. 函数调用，除了第一个参数外，其它参数需要指定参数名
-```swift
-func greet(name: String, day: String) -&amp;gt; String{
-    return &quot;hello \(name), today is \(day).&quot;
-}
-//missing argument label &#39;day:&#39; in call
-greet(&quot;linhongting&quot;, &quot;Saturday&quot;)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//Operator is not a known binary operator&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//Use of unresolved identifier &#39;..&#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;firstForLoop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;firstForLoop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;firstForLoop&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-//正确调用方法
-greet(&quot;linhongting&quot;, day: &quot;Saturday&quot;)
+&lt;h3 id=&quot;section&quot;&gt;2. 函数调用，除了第一个参数外，其它参数需要指定参数名&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;greet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;day&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;hello &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;, today is &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;day&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//missing argument label &#39;day:&#39; in call&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;greet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;linhongting&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Saturday&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//正确调用方法&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;greet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;linhongting&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;day&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Saturday&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 

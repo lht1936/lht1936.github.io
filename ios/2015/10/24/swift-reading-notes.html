@@ -11,7 +11,7 @@
 
     <title>The Swift Programming Language reading notes</title>
     <meta name="description"
-          content="###1. for循环的范围，用..会报错，只能用…```swift//Operator is not a known binary operator//Use of unresolved identifier ‘..’var firstForLoop = 0for i in 0..3{    firstForL...">
+          content="1. for循环的范围，用..会报错，只能用…">
 
     <link rel="canonical" href="http://lht1936.github.io/ios/2015/10/24/swift-reading-notes.html">
     <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
@@ -121,27 +121,28 @@
         
         <div class="col-md-9 markdown-body">
 
-            <p>###1. for循环的范围，用..会报错，只能用…<br />
-```swift<br />
-//Operator is not a known binary operator<br />
-//Use of unresolved identifier ‘..’<br />
-var firstForLoop = 0<br />
-for i in 0..3{<br />
-    firstForLoop += i<br />
-}<br />
-firstForLoop</p>
+            <h3 id="for">1. for循环的范围，用..会报错，只能用…</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-###2. 函数调用，除了第一个参数外，其它参数需要指定参数名
-```swift
-func greet(name: String, day: String) -&gt; String{
-    return "hello \(name), today is \(day)."
-}
-//missing argument label 'day:' in call
-greet("linhongting", "Saturday")
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">//Operator is not a known binary operator</span>
+<span class="c1">//Use of unresolved identifier '..'</span>
+<span class="k">var</span> <span class="nv">firstForLoop</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="mi">3</span><span class="p">{</span>
+    <span class="n">firstForLoop</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="p">}</span>
+<span class="n">firstForLoop</span>
+</code></pre>
+</div>
 
-//正确调用方法
-greet("linhongting", day: "Saturday")
+<h3 id="section">2. 函数调用，除了第一个参数外，其它参数需要指定参数名</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">greet</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">day</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">{</span>
+    <span class="k">return</span> <span class="s">"hello </span><span class="se">\(</span><span class="n">name</span><span class="se">)</span><span class="s">, today is </span><span class="se">\(</span><span class="n">day</span><span class="se">)</span><span class="s">."</span>
+<span class="p">}</span>
+<span class="c1">//missing argument label 'day:' in call</span>
+<span class="nf">greet</span><span class="p">(</span><span class="s">"linhongting"</span><span class="p">,</span> <span class="s">"Saturday"</span><span class="p">)</span>
+
+<span class="c1">//正确调用方法</span>
+<span class="nf">greet</span><span class="p">(</span><span class="s">"linhongting"</span><span class="p">,</span> <span class="nv">day</span><span class="p">:</span> <span class="s">"Saturday"</span><span class="p">)</span>
 </code></pre>
 </div>
 

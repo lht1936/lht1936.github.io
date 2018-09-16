@@ -11,7 +11,7 @@
 
     <title>将codingiOS开源项目导入xCode并运行</title>
     <meta name="description"
-          content="##安装CocoaPodsCodingiOS项目使用业界标准CocoaPods管理依赖。执行以下命令检查是否安装了CocoaPods:bashpod --version如果未安装，执行以下命令进行安装：bashsudo gem install cocoapodsCocoaPods使用ruby编写，所以使用gem命...">
+          content="安装CocoaPodsCodingiOS项目使用业界标准CocoaPods管理依赖。执行以下命令检查是否安装了CocoaPods:">
 
     <link rel="canonical" href="http://lht1936.github.io/ios/2016/03/16/import-codingios-to-xcode.html">
     <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
@@ -121,36 +121,42 @@
         
         <div class="col-md-9 markdown-body">
 
-            <p>##安装CocoaPods<br />
-CodingiOS项目使用业界标准CocoaPods管理依赖。<br />
-执行以下命令检查是否安装了CocoaPods:<br />
-<code class="highlighter-rouge">bash
-pod --version
-</code><br />
-如果未安装，执行以下命令进行安装：<br />
-<code class="highlighter-rouge">bash
-sudo gem install cocoapods
-</code><br />
-CocoaPods使用ruby编写，所以使用gem命令进行安装。</p>
+            <h2 id="cocoapods">安装CocoaPods</h2>
+<p>CodingiOS项目使用业界标准CocoaPods管理依赖。<br />
+执行以下命令检查是否安装了CocoaPods:</p>
 
-<p>##下载CodingiOS源码<br />
-使用git下载：<br />
-<code class="highlighter-rouge">bash
-git clone git://git.coding.net/coding/Coding-iOS.git
-</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>pod --version
+</code></pre>
+</div>
 
-<p>##安装依赖库并运行<br />
-进入源码下载目录，执行源码自带的bootstrap命令，其包含的执行内容包括：<br />
-<code class="highlighter-rouge">bash
-#!/bin/bash
-CMD_PATH=`dirname $0`
-cd $CMD_PATH
+<p>如果未安装，执行以下命令进行安装：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gem install cocoapods
+</code></pre>
+</div>
+
+<p>CocoaPods使用ruby编写，所以使用gem命令进行安装。</p>
+
+<h2 id="codingios">下载CodingiOS源码</h2>
+<p>使用git下载：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone git://git.coding.net/coding/Coding-iOS.git
+</code></pre>
+</div>
+
+<h2 id="section">安装依赖库并运行</h2>
+<p>进入源码下载目录，执行源码自带的bootstrap命令，其包含的执行内容包括：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nv">CMD_PATH</span><span class="o">=</span><span class="sb">`</span>dirname <span class="nv">$0</span><span class="sb">`</span>
+<span class="nb">cd</span> <span class="nv">$CMD_PATH</span>
 cp Coding_iOS/Coding_iOS-Prefix.pch.example Coding_iOS/Coding_iOS-Prefix.pch
 git submodule update --init --recursive
 pod install
 open Coding_iOS.xcworkspace
-exit 0
-</code></p>
+<span class="nb">exit </span>0
+</code></pre>
+</div>
 
 <p>pod install即为安装依赖库，这个过程比较慢，而且需要翻墙，否则下载不下来。<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/import-codingios-to-xcode-1.png" alt="" /><br />

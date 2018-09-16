@@ -126,43 +126,52 @@
 
 <p>asciidoc也是类似于Markdown的一种内容编写格式，自己google哈。</p>
 
-<p>##编译步骤<br />
-1. 使用gradle插件进行编译<br />
+<h2 id="section">编译步骤</h2>
+
+<ol>
+  <li>
+    <p>使用gradle插件进行编译<br />
 因为整个Elasticsearch项目是用gradle来编译生成的，而且源码包的docs目录下也有build.gradle文件，就想到肯定是用<br />
 gradle来进行编译，但是在源码根目录执行gradle assemble并不能编译asciidoc文件，没有任何文档生成。google后才知<br />
-道需要专门的文本解析器asciidoctor，并且它提供了gralde的插件。<br />
-2. 安装gradle asciidoctor插件<br />
-在docs目录将build.gradle重命名进行备份，新建文件build.gradle，输入以下内容：<br />
-```sh<br />
-buildscript {<br />
-        repositories {<br />
-                jcenter()<br />
-        }</p>
+道需要专门的文本解析器asciidoctor，并且它提供了gralde的插件。</p>
+  </li>
+  <li>
+    <p>安装gradle asciidoctor插件<br />
+在docs目录将build.gradle重命名进行备份，新建文件build.gradle，输入以下内容：</p>
+  </li>
+</ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    dependencies {
-            classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.0'
-    }
+<div class="highlighter-rouge"><pre class="highlight"><code>buildscript <span class="o">{</span>
+        repositories <span class="o">{</span>
+                jcenter<span class="o">()</span>
+        <span class="o">}</span>
+
+        dependencies <span class="o">{</span>
+                classpath <span class="s1">'org.asciidoctor:asciidoctor-gradle-plugin:1.5.0'</span>
+        <span class="o">}</span>
+
+
+<span class="o">}</span>
+
+apply plugin: <span class="s1">'org.asciidoctor.gradle.asciidoctor'</span>
+
+asciidoctor <span class="o">{</span>
+        logDocuments <span class="o">=</span> <span class="nb">true
+        </span>sourceDir <span class="o">=</span> file<span class="o">(</span><span class="s1">'reference'</span><span class="o">)</span>
+        outputDir <span class="o">=</span> file<span class="o">(</span><span class="s1">'build/docs123'</span><span class="o">)</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
-<p>}</p>
-
-<p>apply plugin: ‘org.asciidoctor.gradle.asciidoctor’</p>
-
-<p>asciidoctor {<br />
-        logDocuments = true<br />
-        sourceDir = file(‘reference’)<br />
-        outputDir = file(‘build/docs123’)<br />
-}<br />
-```<br />
-sourceDir表示要编译的文档目录，它是一个相对目录，所以上面就表示要编译的文档在docs的reference目录下，asciidoctor会递归处理子目录。</p>
+<p>sourceDir表示要编译的文档目录，它是一个相对目录，所以上面就表示要编译的文档在docs的reference目录下，asciidoctor会递归处理子目录。</p>
 
 <p>如果docs目录下有多个子目录，你可能会想直接用.来表示当前目录，然后处理docs下的所有文档目录，但是使用这种方法，<br />
-编译后会报以下错误：<br />
-<code class="highlighter-rouge">java
-Caused by: java.io.FileNotFoundException: /Users/hongtinglin/Java/elasticsearch-5.2.0-src/docs/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/build/docs123/.DS_Store (File name too long)
-	at org.asciidoctor.gradle.AsciidoctorTask.processSourceDir(AsciidoctorTask.groovy:224)
-</code></p>
+编译后会报以下错误：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Caused</span> <span class="nl">by:</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">FileNotFoundException</span><span class="o">:</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hongtinglin</span><span class="o">/</span><span class="n">Java</span><span class="o">/</span><span class="n">elasticsearch</span><span class="o">-</span><span class="mf">5.2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">src</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">docs123</span><span class="o">/.</span><span class="na">DS_Store</span> <span class="o">(</span><span class="n">File</span> <span class="n">name</span> <span class="n">too</span> <span class="kt">long</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">asciidoctor</span><span class="o">.</span><span class="na">gradle</span><span class="o">.</span><span class="na">AsciidoctorTask</span><span class="o">.</span><span class="na">processSourceDir</span><span class="o">(</span><span class="n">AsciidoctorTask</span><span class="o">.</span><span class="na">groovy</span><span class="o">:</span><span class="mi">224</span><span class="o">)</span>
+</code></pre>
+</div>
 
 <p>暂时没有想到其它办法，就一个个目录编译过去吧。</p>
 

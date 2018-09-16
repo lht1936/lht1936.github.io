@@ -11,7 +11,7 @@
 
     <title>使用Python引用类型的注意事项</title>
     <meta name="description"
-          content="##Python引用类型的使用在Python中，存在引用类型，当把引用类型加入到集合中，需要小心，否则集合中的多个元素可能会指向内存中同一地址的内容，这样会导致当你修改集合中某一个元素时，另一个元素也随之更改，防不胜防。例如：```pythontmp = [‘a’, ‘b’]myDict = {}">
+          content="Python引用类型的使用在Python中，存在引用类型，当把引用类型加入到集合中，需要小心，否则集合中的多个元素可能会指向内存中同一地址的内容，这样会导致当你修改集合中某一个元素时，另一个元素也随之更改，防不胜防。例如：">
 
     <link rel="canonical" href="http://lht1936.github.io/python/2016/01/26/python-reference-type.html">
     <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
@@ -121,26 +121,27 @@
         
         <div class="col-md-9 markdown-body">
 
-            <p>##Python引用类型的使用<br />
-在Python中，存在引用类型，当把引用类型加入到集合中，需要小心，否则集合中的多个元素可能会指向内存中同一地址的内容，这样会导致当你修改集合中某一个元素时，另一个元素也随之更改，防不胜防。<br />
-例如：<br />
-```python<br />
-tmp = [‘a’, ‘b’]<br />
-myDict = {}</p>
+            <h2 id="python">Python引用类型的使用</h2>
+<p>在Python中，存在引用类型，当把引用类型加入到集合中，需要小心，否则集合中的多个元素可能会指向内存中同一地址的内容，这样会导致当你修改集合中某一个元素时，另一个元素也随之更改，防不胜防。<br />
+例如：</p>
 
-<p>myVar1 = tmp<br />
-myVar2 = tmp<br />
-myDict[‘key1’] = myVar1<br />
-myDict[‘key2’] = myVar2</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">tmp</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
+<span class="n">myDict</span> <span class="o">=</span> <span class="p">{}</span>
 
-<p>myDict[‘key1’].extend([‘c’])</p>
+<span class="n">myVar1</span> <span class="o">=</span> <span class="n">tmp</span>
+<span class="n">myVar2</span> <span class="o">=</span> <span class="n">tmp</span>
+<span class="n">myDict</span><span class="p">[</span><span class="s">'key1'</span><span class="p">]</span> <span class="o">=</span> <span class="n">myVar1</span>
+<span class="n">myDict</span><span class="p">[</span><span class="s">'key2'</span><span class="p">]</span> <span class="o">=</span> <span class="n">myVar2</span>
 
-<p>print(str(myDict))</p>
+<span class="n">myDict</span><span class="p">[</span><span class="s">'key1'</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s">'c'</span><span class="p">])</span>
 
-<p>输出：<br />
-{‘key2’: [‘a’, ‘b’, ‘c’], ‘key1’: [‘a’, ‘b’, ‘c’]}</p>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">myDict</span><span class="p">))</span>
 
-<p>```</p>
+<span class="err">输出：</span>
+<span class="p">{</span><span class="s">'key2'</span><span class="p">:</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">],</span> <span class="s">'key1'</span><span class="p">:</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]}</span>
+
+</code></pre>
+</div>
 
 
 

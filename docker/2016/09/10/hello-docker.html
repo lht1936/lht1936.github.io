@@ -11,7 +11,7 @@
 
     <title>在Mac OSX上安装docker并启动Oracle image</title>
     <meta name="description"
-          content="##安装DockerDocker提供了在Mac，Linux，Windows上的安装包，直接下载安装即可，安装的时候都是图形化的方式，无需赘述。Mac Docker: https://download.docker.com/mac/stable/Docker.dmg">
+          content="安装Docker">
 
     <link rel="canonical" href="http://lht1936.github.io/docker/2016/09/10/hello-docker.html">
     <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
@@ -121,22 +121,38 @@
         
         <div class="col-md-9 markdown-body">
 
-            <p>##安装Docker<br />
-Docker提供了在Mac，Linux，Windows上的安装包，直接下载安装即可，安装的时候都是图形化的方式，无需赘述。<br />
+            <h2 id="docker">安装Docker</h2>
+
+<p>Docker提供了在Mac，Linux，Windows上的安装包，直接下载安装即可，安装的时候都是图形化的方式，无需赘述。<br />
 Mac Docker: https://download.docker.com/mac/stable/Docker.dmg</p>
 
-<p>##对Docker的理解<br />
-刚开始使用，建立一个对Docker实现机制的初步理解，对接下来的操作与学习有所帮助。<br />
-1. Docker本地程序在宿主机上启动一组进程，提供一个虚拟化的环境。Mac版本的Docker本地程序使用的虚拟化技术是hypervisor。<br />
-2. 提供docker，docker-compose客户端工具，对这个虚拟化基础镜像进行管理，目前基础镜像Dokcer官方使用的是Apline Linux，一个面想社区的Linux分支。<br />
-3. 在虚拟化Linux基础上，启动了Docker Engine，这个engine厉害了，可以管理很多容器，容器里运行各种各样的Image。<br />
-4. 所以，在不同的宿主机上，Docker需要提供3种本地程序，对本地环境进行虚拟化，当虚拟化完成以后，都是运行一样的基础镜像。<br />
-5. Docker Engine管理的各个Container更不用说了，统一的一套代码程序和机制，让各个开发环境无缝在多种宿主机运行，虚拟化可移植化，开发测试生产可以无缝对接。</p>
+<h2 id="docker-1">对Docker的理解</h2>
+
+<p>刚开始使用，建立一个对Docker实现机制的初步理解，对接下来的操作与学习有所帮助。</p>
+
+<ol>
+  <li>
+    <p>Docker本地程序在宿主机上启动一组进程，提供一个虚拟化的环境。Mac版本的Docker本地程序使用的虚拟化技术是hypervisor。</p>
+  </li>
+  <li>
+    <p>提供docker，docker-compose客户端工具，对这个虚拟化基础镜像进行管理，目前基础镜像Dokcer官方使用的是Apline Linux，一个面想社区的Linux分支。</p>
+  </li>
+  <li>
+    <p>在虚拟化Linux基础上，启动了Docker Engine，这个engine厉害了，可以管理很多容器，容器里运行各种各样的Image。</p>
+  </li>
+  <li>
+    <p>所以，在不同的宿主机上，Docker需要提供3种本地程序，对本地环境进行虚拟化，当虚拟化完成以后，都是运行一样的基础镜像。</p>
+  </li>
+  <li>
+    <p>Docker Engine管理的各个Container更不用说了，统一的一套代码程序和机制，让各个开发环境无缝在多种宿主机运行，虚拟化可移植化，开发测试生产可以无缝对接。</p>
+  </li>
+</ol>
 
 <p>以上分析不一定对，因为刚开始学，只是自己的理解，后面会持续研究学习，纠正错误的地方。</p>
 
-<p>##Docker国内Registry<br />
-DaoCloud: http://www.daocloud.io/<br />
+<h2 id="dockerregistry">Docker国内Registry</h2>
+
+<p>DaoCloud: http://www.daocloud.io/<br />
 因为GFW的原因，下载image会很慢，甚至无法完成下载，所以应该使用国内的镜像，daocloud提供对官方的镜像服务，还有自己的镜像:<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/daocloud-services.png" alt="" /></p>
 
@@ -154,18 +170,20 @@ DaoCloud: http://www.daocloud.io/<br />
 <p>在ip.cn上一查就知道在国内咯:<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/show-ip-home" alt="" /></p>
 
-<p>##安装Oracle 11g Express Edition<br />
-执行docker pull nameless/oracle-xe-11g 下载oracle<br />
+<h2 id="oracle-11g-express-edition">安装Oracle 11g Express Edition</h2>
+<p>执行docker pull nameless/oracle-xe-11g 下载oracle<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/docker-oracle-downloaded" alt="" /></p>
 
 <p>20分钟左右下载完毕</p>
 
-<p>##测试Oracle<br />
-考虑到Oracle可能需要较多内存，我把Docker最大内存加到4G了，谁叫Macbook Pro内存杠杠的呢～<br />
-启动oracle image<br />
-<code class="highlighter-rouge">sh
-docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g
-</code></p>
+<h2 id="oracle">测试Oracle</h2>
+
+<p>考虑到Oracle可能需要较多内存，我把Docker最大内存加到4G了，谁叫Macbook Pro内存杠杠的呢～<br />
+启动oracle image</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g
+</code></pre>
+</div>
 
 <p>启动成功：<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/run-docker-ubuntu-oracle-11g-xe" alt="" /></p>
@@ -176,23 +194,24 @@ docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g
 <p>SSH连接Ubuntu系统，用户名root，密码admin：<br />
 <img src="http://7xpph3.com1.z0.glb.clouddn.com/connect-docker-ubuntu" alt="" /></p>
 
-<p>进入Ubuntu后，连接Oracle测试，用户名sys或者system，密码都是oracle<br />
-```sh<br />
-hostname: localhost  <br />
-port: 49161  <br />
-sid: xe  <br />
-username: sys/system  <br />
-password: oracle</p>
+<p>进入Ubuntu后，连接Oracle测试，用户名sys或者system，密码都是oracle</p>
 
-<p>XE =<br />
-  (DESCRIPTION =<br />
-    (ADDRESS = (PROTOCOL = TCP)(HOST = f80c1ac48360)(PORT = 1521))<br />
-    (CONNECT_DATA =<br />
-      (SERVER = DEDICATED)<br />
-      (SERVICE_NAME = XE)<br />
-    )<br />
-  )<br />
-```</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>hostname: localhost  
+port: 49161  
+sid: xe  
+username: sys/system  
+password: oracle 
+
+XE <span class="o">=</span>
+  <span class="o">(</span>DESCRIPTION <span class="o">=</span>
+    <span class="o">(</span>ADDRESS <span class="o">=</span> <span class="o">(</span>PROTOCOL <span class="o">=</span> TCP<span class="o">)(</span>HOST <span class="o">=</span> f80c1ac48360<span class="o">)(</span>PORT <span class="o">=</span> 1521<span class="o">))</span>
+    <span class="o">(</span>CONNECT_DATA <span class="o">=</span>
+      <span class="o">(</span>SERVER <span class="o">=</span> DEDICATED<span class="o">)</span>
+      <span class="o">(</span>SERVICE_NAME <span class="o">=</span> XE<span class="o">)</span>
+    <span class="o">)</span>
+  <span class="o">)</span>
+</code></pre>
+</div>
 
 <p>有了上面的连接串，就可以用自己最熟悉的 pl/sql developer 来连接啦。</p>
 

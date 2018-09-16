@@ -125,8 +125,8 @@
 <a href="http://stackoverflow.com/questions/19717625/download-ios-sdk-7-0-documentation-for-offline-install">Download iOS SDK 7.0 documentation for offline install</a><br />
 用wireshark获取文档的下载地址，然后使用其他工具直接下载，更快。</p>
 
-<p>##Wireshark<br />
-顺便学学wireshark，官方网站很多资料，比如：<br />
+<h2 id="wireshark">Wireshark</h2>
+<p>顺便学学wireshark，官方网站很多资料，比如：<br />
 1.<a href="https://www.youtube.com/playlist?list=PLnKJHZhW_BuCPcIg6Ja2boDeHIRwoHMT-">youtube视频</a><br />
 2.wireshark还会跟Apple一样搞活动，在每年6月份，名字叫<a href="https://sharkfest.wireshark.org/index.html">SharkFest</a>，这是他们从08年到15年的历史纪录：<br />
   * <a href="http://sharkfest.wireshark.org/sf15.html">SharkFest’15</a><br />
@@ -143,37 +143,38 @@
   * PDF: <a href="https://www.wireshark.org/download/docs/user-guide-us.pdf">US</a> or <a href="https://www.wireshark.org/download/docs/user-guide-a4.pdf">A4</a><br />
 4.Wireshark还有很多书籍介绍的。</p>
 
-<p>##使用Wireshark嗅探<br />
-1.首先在活动监视器中找到Xcode的进程id，然后在Xcode中启动下载<br />
+<h2 id="wireshark-1">使用Wireshark嗅探</h2>
+<p>1.首先在活动监视器中找到Xcode的进程id，然后在Xcode中启动下载<br />
 2.通过lsof -i | grep pid 的方式，找到Xcode所使用的下载端口号<br />
 3.在Wireshark中通过tcp.port == [port]的方式过滤出下载的tcp网络包<br />
 4.在包内容中寻找下载地址，但是发现被加密了。。</p>
 
 <p>此方法失败。。</p>
 
-<p>##apple文档链接<br />
-最后还是使用这个文件中的地址来进行下载。。<br />
+<h2 id="apple">apple文档链接</h2>
+<p>最后还是使用这个文件中的地址来进行下载。。<br />
 <a href="https://developer.apple.com/library/downloads/docset-index.dvtdownloadableindex">https://developer.apple.com/library/downloads/docset-index.dvtdownloadableindex</a><br />
 从这个xml文件中搜索你要的版本对应的文档，比如我要下载iOS9.3的，直接搜iOS9.3，可以找到这个版本对应的iOS文档地址为：<br />
 https://devimages.apple.com.edgekey.net/docsets/20160321/031-52212-A.dmg<br />
 虽然可以直接使用这个地址下载，但速度会很慢，将edgekey.net去掉，使用apple.com站点下载即可提高速度。<br />
 小提示：请使用百度离线下载，离线下载完成后在从百度云下载，很快！！</p>
 
-<p>##安装dmg文件<br />
-参考以下链接,<strong>亲测有效哈</strong>：<br />
+<h2 id="dmg">安装dmg文件</h2>
+<p>参考以下链接,<strong>亲测有效哈</strong>：<br />
 http://stackoverflow.com/questions/29443681/how-to-install-xcode-documentation-by-dmg-file<br />
 主要是两点：<br />
 1.Xcode下载完成的目录为~/Library/Caches/com.apple.dt.Xcode/Downloads/<br />
 2.文件命名规则为”identifier string” + “-“ + “version string” + “.dmg”<br />
 例如iOS 9.3的文件名：com.apple.adc.documentation.iOS-93.5.dmg</p>
 
-<p>##Xcode安装或升级<br />
-如果需要安装Xcode，请去开发者中心登录下载，在app store真是太慢了！！<br />
+<h2 id="xcode">Xcode安装或升级</h2>
+<p>如果需要安装Xcode，请去开发者中心登录下载，在app store真是太慢了！！<br />
 链接：https://developer.apple.com/downloads/<br />
-使用以下命令验证安装的Xcode来源:<br />
-<code class="highlighter-rouge">bash
-spctl --assess --verbose /Applications/Xcode.app
-</code></p>
+使用以下命令验证安装的Xcode来源:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>spctl --assess --verbose /Applications/Xcode.app
+</code></pre>
+</div>
 
 <p>下载Xcode 7.3，里面自带ios simulator 9.3，所以sdk不用另外再下载，除非需要其他版本。<br />
 文档还是要另外下载安装的。</p>
