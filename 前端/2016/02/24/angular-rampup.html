@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+    <title>MacOS X eclipse angular插件安装与配置</title>
+    <meta name="description"
+          content="在eclipse中安装angular插件1.插件安装地址为http://oss.opensagres.fr/angularjs-eclipse/1.1.0/最新的安装地址在这里。">
+
+    <link rel="canonical" href="http://lht1936.github.io/%E5%89%8D%E7%AB%AF/2016/02/24/angular-rampup.html">
+    <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link href="https://cdn.bootcss.com/gitalk/1.2.2/gitalk.css" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="container">
+        <a id="site-header-brand" href="/" title="湘江鸿">
+            <span class="octicon octicon-mark-github"></span> 湘江鸿
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <a href="/"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Home">
+                Home
+            </a>
+            
+            <a href="/archives"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Archives">
+                Archives
+            </a>
+            
+            <a href="/bookmark"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Bookmark">
+                Bookmark
+            </a>
+            
+            <a href="/open-source"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Open-Source">
+                Open-Source
+            </a>
+            
+            <a href="/about"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="About">
+                About
+            </a>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="MacOS X eclipse angular插件安装与配置">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            <h1>MacOS X eclipse angular插件安装与配置</h1>
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2016/02/24
+                
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <h2 id="eclipseangular">在eclipse中安装angular插件</h2>
+<p>1.插件安装地址为http://oss.opensagres.fr/angularjs-eclipse/1.1.0/<br />
+最新的安装地址在<a href="https://github.com/angelozerr/angularjs-eclipse/wiki/Installation-Update-Site">这里</a>。</p>
+
+<p>2.在eclipse中选择help-&gt;install new software，输入插件安装地址，选择所有的插件：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/augular-getting-started-1.png" alt="" /></p>
+
+<p>3.安装插件预览：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/auglar-getting-started-2.png" alt="" /></p>
+
+<h2 id="section">插件配置</h2>
+<ol>
+  <li>全局配置<br />
+由于AngularJS插件使用了JavaScript分析引擎tern.js（使用JavaScript编写），因此需要node.js来执行这个引擎。<br />
+选择eclipse/偏好设置，由于JEE版本的eclipse包含了JSDT，tern配置节点在JavaScript节点之下：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-3.png" alt="" /></li>
+</ol>
+
+<p>保持默认配置即可，默认使用的是安装插件时已经装好的node.js。<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-4.png" alt="" /></p>
+
+<p>2.项目配置<br />
+新建一个dynamic web project，并且转为angular项目<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-5a.png" alt="" /></p>
+
+<p>选择Tern支持插件，我在保持默认的基础上选择了jQuery，并确定<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-6.png" alt="" /></p>
+
+<p>打开项目属性，可以看到项目属性里增加了AngularJS和Tern，说明已经是angular项目了：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-7a.png" alt="" /></p>
+
+<p>3.脚本路径配置<br />
+使用Tern进行代码完成，代码验证等特性，Tern需要预先加载JavaScript文件，这样就可以用于代码完成和代码验证了。<br />
+在WebContent下面新建js文件夹，并将下载的angular.js拖到其中：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-8.png" alt="" /></p>
+
+<p>打开项目属性，可以看到script paths 已经自动加入了angular.js<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-9.png" alt="" /></p>
+
+<h2 id="section-1">检查验证功能是否有效</h2>
+<p>新建一个html文件，输入以下简单angular代码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/angular.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">""</span><span class="nt">&gt;</span>
+ 
+<span class="nt">&lt;p&gt;</span>Input something in the input box:<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>Name : <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"name"</span> <span class="na">placeholder=</span><span class="s">"Enter name here"</span><span class="nt">&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;h1&gt;</span>Hello <span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>可以看到ng-app还是带黄色下划线警告：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-10.png" alt="" /></p>
+
+<p>我们打开项目属性，在Validation节点下做如下配置。<br />
+关闭html syntax validator和JSP content validator，选择对应的angular validator<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-11.png" alt="" /></p>
+
+<p>关闭已经打开的html文件，再次打开，可以看到警告已经消失：<br />
+<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-12.png" alt="" /></p>
+
+<h2 id="section-2">代码提示功能</h2>
+<p><img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-13.png" alt="" /></p>
+
+<h2 id="section-3">部署应用</h2>
+<p><img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-14.png" alt="" /></p>
+
+
+
+            <!-- copyright -->
+            <div>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://lht1936.github.io">湘江鸿的博客</a>）</strong>
+   </p>
+</div>
+            <!-- Comments -->
+            <div class="comment">
+                
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: '/%E5%89%8D%E7%AB%AF/2016/02/24/angular-rampup.html',
+            clientID: '2347868ee370ead4247e',
+            clientSecret: '4fc5fe85a6458851c4c46f7508ee72940dbb5801',
+            repo: 'lht1936.github.io',
+            owner: 'lht1936',
+            admin: ['lht1936'],
+            labels: ['gitment'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+        </div>
+        
+
+    </div>
+
+</article>
+
+        </div>
+
+    <footer class="container">
+
+    <div class="site-footer">
+
+        <div class="site-footer-icons">
+            <a target="_blank" href="https://weibo.com/u/1260208131">
+                微博
+            </a>
+            <a target="_blank" href="https://github.com/lht1936">
+                Github
+            </a>
+        </div>
+
+        <div class="scrolltop">
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+
+    </div>
+
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+
+    
+
+    <!---->
+
+</footer>
+
+
+    </body>
+
+</html>

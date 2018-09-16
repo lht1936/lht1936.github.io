@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+    <title>离线安装Xcode和iOS文档</title>
+    <meta name="description"
+          content="今天把Xcode从7.0.1更新到7.2.1了，想更新下离线文档，醉了天朝的网络，半天没动静，搜了下找到这篇帖子：Download iOS SDK 7.0 documentation for offline install用wireshark获取文档的下载地址，然后使用其他工具直接下载，更快。">
+
+    <link rel="canonical" href="http://lht1936.github.io/others/2016/03/12/wireshark-ios-doc.html">
+    <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link href="https://cdn.bootcss.com/gitalk/1.2.2/gitalk.css" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="container">
+        <a id="site-header-brand" href="/" title="湘江鸿">
+            <span class="octicon octicon-mark-github"></span> 湘江鸿
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <a href="/"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Home">
+                Home
+            </a>
+            
+            <a href="/archives"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Archives">
+                Archives
+            </a>
+            
+            <a href="/bookmark"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Bookmark">
+                Bookmark
+            </a>
+            
+            <a href="/open-source"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Open-Source">
+                Open-Source
+            </a>
+            
+            <a href="/about"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="About">
+                About
+            </a>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="离线安装Xcode和iOS文档">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            <h1>离线安装Xcode和iOS文档</h1>
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2016/03/12
+                
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <p>今天把Xcode从7.0.1更新到7.2.1了，想更新下离线文档，醉了天朝的网络，半天没动静，搜了下找到这篇帖子：<br />
+<a href="http://stackoverflow.com/questions/19717625/download-ios-sdk-7-0-documentation-for-offline-install">Download iOS SDK 7.0 documentation for offline install</a><br />
+用wireshark获取文档的下载地址，然后使用其他工具直接下载，更快。</p>
+
+<h2 id="wireshark">Wireshark</h2>
+<p>顺便学学wireshark，官方网站很多资料，比如：<br />
+1.<a href="https://www.youtube.com/playlist?list=PLnKJHZhW_BuCPcIg6Ja2boDeHIRwoHMT-">youtube视频</a><br />
+2.wireshark还会跟Apple一样搞活动，在每年6月份，名字叫<a href="https://sharkfest.wireshark.org/index.html">SharkFest</a>，这是他们从08年到15年的历史纪录：<br />
+  * <a href="http://sharkfest.wireshark.org/sf15.html">SharkFest’15</a><br />
+  * <a href="http://sharkfest.wireshark.org/sf14.html">SharkFest’14</a><br />
+  * <a href="http://sharkfest.wireshark.org/sf13.html">SharkFest’13</a><br />
+  * <a href="http://sharkfest.wireshark.org/sf12.html">SharkFest’12</a><br />
+  * <a href="http://sharkfest.wireshark.org/sf11.html">SharkFest’11</a><br />
+  * <a href="http://sharkfest.wireshark.org/sf10.html">SharkFest’10</a><br />
+  * <a href="http://sharkfest.wireshark.org/sf09.html">SharkFest’09</a><br />
+  * <a href="http://sharkfest.wireshark.org/sf08.html">SharkFest’08</a><br />
+3.上面都是视频类，上最通用的文档类，直接抄袭咯：<br />
+  * Web pages(browseable):<a href="https://www.wireshark.org/docs/wsug_html">One huge page</a> or <a href="https://www.wireshark.org/docs/wsug_html_chunked">mutiple pages</a><br />
+  * Web pages(ZIP file): <a href="https://www.wireshark.org/download/docs/wsug_html.zip">One huge page</a> or <a href="https://www.wireshark.org/download/docs/wsug_html_chunked.zip">multiple pages</a><br />
+  * PDF: <a href="https://www.wireshark.org/download/docs/user-guide-us.pdf">US</a> or <a href="https://www.wireshark.org/download/docs/user-guide-a4.pdf">A4</a><br />
+4.Wireshark还有很多书籍介绍的。</p>
+
+<h2 id="wireshark-1">使用Wireshark嗅探</h2>
+<p>1.首先在活动监视器中找到Xcode的进程id，然后在Xcode中启动下载<br />
+2.通过lsof -i | grep pid 的方式，找到Xcode所使用的下载端口号<br />
+3.在Wireshark中通过tcp.port == [port]的方式过滤出下载的tcp网络包<br />
+4.在包内容中寻找下载地址，但是发现被加密了。。</p>
+
+<p>此方法失败。。</p>
+
+<h2 id="apple">apple文档链接</h2>
+<p>最后还是使用这个文件中的地址来进行下载。。<br />
+<a href="https://developer.apple.com/library/downloads/docset-index.dvtdownloadableindex">https://developer.apple.com/library/downloads/docset-index.dvtdownloadableindex</a><br />
+从这个xml文件中搜索你要的版本对应的文档，比如我要下载iOS9.3的，直接搜iOS9.3，可以找到这个版本对应的iOS文档地址为：<br />
+https://devimages.apple.com.edgekey.net/docsets/20160321/031-52212-A.dmg<br />
+虽然可以直接使用这个地址下载，但速度会很慢，将edgekey.net去掉，使用apple.com站点下载即可提高速度。<br />
+小提示：请使用百度离线下载，离线下载完成后在从百度云下载，很快！！</p>
+
+<h2 id="dmg">安装dmg文件</h2>
+<p>参考以下链接,<strong>亲测有效哈</strong>：<br />
+http://stackoverflow.com/questions/29443681/how-to-install-xcode-documentation-by-dmg-file<br />
+主要是两点：<br />
+1.Xcode下载完成的目录为~/Library/Caches/com.apple.dt.Xcode/Downloads/<br />
+2.文件命名规则为”identifier string” + “-“ + “version string” + “.dmg”<br />
+例如iOS 9.3的文件名：com.apple.adc.documentation.iOS-93.5.dmg</p>
+
+<h2 id="xcode">Xcode安装或升级</h2>
+<p>如果需要安装Xcode，请去开发者中心登录下载，在app store真是太慢了！！<br />
+链接：https://developer.apple.com/downloads/<br />
+使用以下命令验证安装的Xcode来源:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>spctl --assess --verbose /Applications/Xcode.app
+</code></pre>
+</div>
+
+<p>下载Xcode 7.3，里面自带ios simulator 9.3，所以sdk不用另外再下载，除非需要其他版本。<br />
+文档还是要另外下载安装的。</p>
+
+
+
+            <!-- copyright -->
+            <div>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://lht1936.github.io">湘江鸿的博客</a>）</strong>
+   </p>
+</div>
+            <!-- Comments -->
+            <div class="comment">
+                
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: '/others/2016/03/12/wireshark-ios-doc.html',
+            clientID: '2347868ee370ead4247e',
+            clientSecret: '4fc5fe85a6458851c4c46f7508ee72940dbb5801',
+            repo: 'lht1936.github.io',
+            owner: 'lht1936',
+            admin: ['lht1936'],
+            labels: ['gitment'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+        </div>
+        
+
+    </div>
+
+</article>
+
+        </div>
+
+    <footer class="container">
+
+    <div class="site-footer">
+
+        <div class="site-footer-icons">
+            <a target="_blank" href="https://weibo.com/u/1260208131">
+                微博
+            </a>
+            <a target="_blank" href="https://github.com/lht1936">
+                Github
+            </a>
+        </div>
+
+        <div class="scrolltop">
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+
+    </div>
+
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+
+    
+
+    <!---->
+
+</footer>
+
+
+    </body>
+
+</html>

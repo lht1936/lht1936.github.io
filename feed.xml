@@ -5,8 +5,8 @@
     <description>记录湘江鸿技术与生活的点点滴滴</description>
     <link>http://lht1936.github.io/</link>
     <atom:link href="http://lht1936.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 16 Sep 2018 17:31:23 +0800</pubDate>
-    <lastBuildDate>Sun, 16 Sep 2018 17:31:23 +0800</lastBuildDate>
+    <pubDate>Sun, 16 Sep 2018 18:34:30 +0800</pubDate>
+    <lastBuildDate>Sun, 16 Sep 2018 18:34:30 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -188,11 +188,11 @@ XE &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 </description>
         <pubDate>Tue, 16 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://lht1936.github.io/%E5%85%B6%E4%BB%96/2016/08/16/site-reliability-engineering.html</link>
-        <guid isPermaLink="true">http://lht1936.github.io/%E5%85%B6%E4%BB%96/2016/08/16/site-reliability-engineering.html</guid>
+        <link>http://lht1936.github.io/others/2016/08/16/SRE-notes.html</link>
+        <guid isPermaLink="true">http://lht1936.github.io/others/2016/08/16/SRE-notes.html</guid>
         
         
-        <category>其他</category>
+        <category>others</category>
         
       </item>
     
@@ -315,11 +315,11 @@ http://stackoverflow.com/questions/29443681/how-to-install-xcode-documentation-b
 
 </description>
         <pubDate>Sat, 12 Mar 2016 00:00:00 +0800</pubDate>
-        <link>http://lht1936.github.io/%E5%85%B6%E4%BB%96/2016/03/12/wireshark-ios-documentation.html</link>
-        <guid isPermaLink="true">http://lht1936.github.io/%E5%85%B6%E4%BB%96/2016/03/12/wireshark-ios-documentation.html</guid>
+        <link>http://lht1936.github.io/others/2016/03/12/wireshark-ios-doc.html</link>
+        <guid isPermaLink="true">http://lht1936.github.io/others/2016/03/12/wireshark-ios-doc.html</guid>
         
         
-        <category>其他</category>
+        <category>others</category>
         
       </item>
     
@@ -443,11 +443,11 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
 
 </description>
         <pubDate>Wed, 24 Feb 2016 00:00:00 +0800</pubDate>
-        <link>http://lht1936.github.io/%E5%89%8D%E7%AB%AF/2016/02/24/angularjs-getting-started.html</link>
-        <guid isPermaLink="true">http://lht1936.github.io/%E5%89%8D%E7%AB%AF/2016/02/24/angularjs-getting-started.html</guid>
+        <link>http://lht1936.github.io/fe/2016/02/24/angular-rampup.html</link>
+        <guid isPermaLink="true">http://lht1936.github.io/fe/2016/02/24/angular-rampup.html</guid>
         
         
-        <category>前端</category>
+        <category>FE</category>
         
       </item>
     
