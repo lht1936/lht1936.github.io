@@ -150,267 +150,249 @@
 		<span class="na">p:idleConnectionTestPeriod=</span><span class="s">"300"</span> <span class="na">destroy-method=</span><span class="s">"close"</span><span class="nt">/&gt;</span>
 </code></pre>
 </div>
+
 <p>SpringBoot数据源配置：</p>
 
-<pre><code class="language-Java">@Configuration
-public class DataSourceConfiguration {
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DataSourceConfiguration</span> <span class="o">{</span>
 
-    @Value("${db.driverClass}")
-    private String jdbcDriver;
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${db.driverClass}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">jdbcDriver</span><span class="o">;</span>
 
-    @Value("${db.jdbcUrl}")
-    private String jdbcUrl;
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${db.jdbcUrl}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">jdbcUrl</span><span class="o">;</span>
 
-    @Value("${db.user}")
-    private String jdbcUsername;
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${db.user}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">jdbcUsername</span><span class="o">;</span>
 
-    @Value("${db.password}")
-    private String jdbcPassword;
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${db.password}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">jdbcPassword</span><span class="o">;</span>
 
-    @Value("${db.preferredTestQuery}")
-    private String preferredTestQuery;
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${db.preferredTestQuery}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">preferredTestQuery</span><span class="o">;</span>
 
-    @Value("${db.initialPoolSize}")
-    private Integer initialPoolSize;
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${db.initialPoolSize}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">initialPoolSize</span><span class="o">;</span>
 
-    @Value("${db.minPoolSize}")
-    private Integer minPoolSize;
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${db.minPoolSize}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">minPoolSize</span><span class="o">;</span>
 
-    @Value("${db.maxPoolSize}")
-    private Integer maxPoolSize;
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${db.maxPoolSize}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">maxPoolSize</span><span class="o">;</span>
 
-    @Bean(destroyMethod = "close")
-    public ComboPooledDataSource createDataSource() throws Exception {
-        ComboPooledDataSource dataSource = new ComboPooledDataSource();
-        dataSource.setDriverClass(jdbcDriver);
-        dataSource.setJdbcUrl(jdbcUrl);
-        dataSource.setUser(jdbcUsername);
-        dataSource.setPassword(jdbcPassword);
-        dataSource.setPreferredTestQuery(preferredTestQuery);
-        dataSource.setInitialPoolSize(initialPoolSize);
-        dataSource.setMaxPoolSize(maxPoolSize);
-        dataSource.setMinPoolSize(minPoolSize);
-        dataSource.setTestConnectionOnCheckin(true);
-        dataSource.setIdleConnectionTestPeriod(300);
-        return dataSource;
-    }
+    <span class="nd">@Bean</span><span class="o">(</span><span class="n">destroyMethod</span> <span class="o">=</span> <span class="s">"close"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">ComboPooledDataSource</span> <span class="n">createDataSource</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">ComboPooledDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ComboPooledDataSource</span><span class="o">();</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setDriverClass</span><span class="o">(</span><span class="n">jdbcDriver</span><span class="o">);</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setJdbcUrl</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">);</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setUser</span><span class="o">(</span><span class="n">jdbcUsername</span><span class="o">);</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">jdbcPassword</span><span class="o">);</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setPreferredTestQuery</span><span class="o">(</span><span class="n">preferredTestQuery</span><span class="o">);</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setInitialPoolSize</span><span class="o">(</span><span class="n">initialPoolSize</span><span class="o">);</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setMaxPoolSize</span><span class="o">(</span><span class="n">maxPoolSize</span><span class="o">);</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setMinPoolSize</span><span class="o">(</span><span class="n">minPoolSize</span><span class="o">);</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setTestConnectionOnCheckin</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">dataSource</span><span class="o">.</span><span class="na">setIdleConnectionTestPeriod</span><span class="o">(</span><span class="mi">300</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">dataSource</span><span class="o">;</span>
+    <span class="o">}</span>
 
-}
+<span class="o">}</span>
 
-</code></pre>
-
-<h3 id="mybatissqlsessionfactory">2.Mybatis的SqlSessionFactory</h3>
-<p>SpringMVC的SqlSessionFactory定义如下<br />
-```xml</p>
-<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="wrappedDataSource"></property>
-        <property name="configLocation" value="classpath:spring/mybatis-config.xml"></property>
-        <property name="mapperLocations">
-            <array>
-                <value>classpath:mybatis/*.xml</value>
-            </array>
-        </property>
-        <!-- 分页插件 -->
-        <property name="plugins">
-            <array>
-                <bean class="com.github.pagehelper.PageInterceptor">
-                    <property name="properties">
-                        <!-- config params as the following -->
-                        <value>
-                            helperDialect=mysql
-                        </value>
-                    </property>
-                </bean>
-            </array>
-        </property>
-    </bean>
-<div class="highlighter-rouge"><pre class="highlight"><code>转化为SpringBoot，需要引入mybatis的自动配置jar包，分页jar包。
-在POM文件中添加如下jar包:
-```xml
-&lt;dependency&gt;
-    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
-    &lt;version&gt;1.3.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
-    &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;
-    &lt;version&gt;1.2.8&lt;/version&gt;
-&lt;/dependency&gt;
 </code></pre>
 </div>
-<p>并在application.properties中添加如下配置：<br />
-<code class="highlighter-rouge">yaml
-mybatis.config-location=classpath:mybatis-config.xml
+
+<h3 id="mybatissqlsessionfactory">2.Mybatis的SqlSessionFactory</h3>
+
+<p>SpringMVC的SqlSessionFactory定义如下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"sqlSessionFactory"</span> <span class="na">class=</span><span class="s">"org.mybatis.spring.SqlSessionFactoryBean"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSource"</span> <span class="na">ref=</span><span class="s">"wrappedDataSource"</span><span class="nt">&gt;&lt;/property&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"configLocation"</span> <span class="na">value=</span><span class="s">"classpath:spring/mybatis-config.xml"</span><span class="nt">&gt;&lt;/property&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"mapperLocations"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;array&gt;</span>
+                <span class="nt">&lt;value&gt;</span>classpath:mybatis/*.xml<span class="nt">&lt;/value&gt;</span>
+            <span class="nt">&lt;/array&gt;</span>
+        <span class="nt">&lt;/property&gt;</span>
+        <span class="c">&lt;!-- 分页插件 --&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"plugins"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;array&gt;</span>
+                <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"com.github.pagehelper.PageInterceptor"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"properties"</span><span class="nt">&gt;</span>
+                        <span class="c">&lt;!-- config params as the following --&gt;</span>
+                        <span class="nt">&lt;value&gt;</span>
+                            helperDialect=mysql
+                        <span class="nt">&lt;/value&gt;</span>
+                    <span class="nt">&lt;/property&gt;</span>
+                <span class="nt">&lt;/bean&gt;</span>
+            <span class="nt">&lt;/array&gt;</span>
+        <span class="nt">&lt;/property&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+</code></pre>
+</div>
+
+<p>转化为SpringBoot，需要引入mybatis的自动配置jar包，分页jar包。</p>
+
+<p>在POM文件中添加如下jar包:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.mybatis.spring.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>mybatis-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.3.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.github.pagehelper<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>pagehelper-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.2.8<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>并在application.properties中添加如下配置：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mybatis.config-location=classpath:mybatis-config.xml
 mybatis.mapper-locations=classpath:mapper/*.xml
 pagehelper.helper-dialect=mysql
-</code><br />
-SqlSessionFactory能自动找到Spring容器中的DataSource 实例。</p>
+</code></pre>
+</div>
+
+<p>SqlSessionFactory能自动找到Spring容器中的DataSource 实例。</p>
 
 <p>还需要告诉Mybatis从哪个包里搜索Mapper实例，在启动Class上使用注解@MapperScan完成。</p>
 
 <h2 id="section-1">服务层迁移</h2>
 
-<p>服务层主要是事务的迁移，在SpringMVC中，在XML文件中定义切片，并根据特定的异常类型进行事务回滚（在这里是ServiceException）。<br />
-```xml</p>
-<aop:config>
-        <aop:pointcut id="txPointCutDef" expression="this(com.jhcl.ucclub.core.TransactionalAspectAwareService)" />
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCutDef" />
-    </aop:config>
+<p>服务层主要是事务的迁移，在SpringMVC中，在XML文件中定义切片，并根据特定的异常类型进行事务回滚（在这里是ServiceException）。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tx:advice id="txAdvice" transaction-manager="transactionManager"&gt;
-    &lt;tx:attributes&gt;
-        &lt;tx:method name="get*" read-only="true"/&gt;
-        &lt;tx:method name="list*" read-only="true"/&gt;
-        &lt;tx:method name="search*" read-only="true"/&gt;
-        &lt;tx:method name="select*" read-only="true"/&gt;
-        &lt;tx:method name="view*" read-only="true"/&gt;
-        &lt;tx:method name="*" read-only="false" propagation="REQUIRED"
-                   rollback-for="com.jhcl.ucclub.core.ServiceException"/&gt;
-    &lt;/tx:attributes&gt;
-&lt;/tx:advice&gt; ```
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;aop:config&gt;</span>
+        <span class="nt">&lt;aop:pointcut</span> <span class="na">id=</span><span class="s">"txPointCutDef"</span> <span class="na">expression=</span><span class="s">"this(com.jhcl.ucclub.core.TransactionalAspectAwareService)"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;aop:advisor</span> <span class="na">advice-ref=</span><span class="s">"txAdvice"</span> <span class="na">pointcut-ref=</span><span class="s">"txPointCutDef"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/aop:config&gt;</span>
+
+    <span class="nt">&lt;tx:advice</span> <span class="na">id=</span><span class="s">"txAdvice"</span> <span class="na">transaction-manager=</span><span class="s">"transactionManager"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tx:attributes&gt;</span>
+            <span class="nt">&lt;tx:method</span> <span class="na">name=</span><span class="s">"get*"</span> <span class="na">read-only=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;tx:method</span> <span class="na">name=</span><span class="s">"list*"</span> <span class="na">read-only=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;tx:method</span> <span class="na">name=</span><span class="s">"search*"</span> <span class="na">read-only=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;tx:method</span> <span class="na">name=</span><span class="s">"select*"</span> <span class="na">read-only=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;tx:method</span> <span class="na">name=</span><span class="s">"view*"</span> <span class="na">read-only=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;tx:method</span> <span class="na">name=</span><span class="s">"*"</span> <span class="na">read-only=</span><span class="s">"false"</span> <span class="na">propagation=</span><span class="s">"REQUIRED"</span>
+                       <span class="na">rollback-for=</span><span class="s">"com.jhcl.ucclub.core.ServiceException"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/tx:attributes&gt;</span>
+    <span class="nt">&lt;/tx:advice&gt;</span>
 </code></pre>
 </div>
 
-<p>SpringBoot中使用Java Config完成：<br />
-```Java<br />
-package com.lht1936.ucclub.config.service;</p>
+<p>SpringBoot中使用Java Config完成：</p>
 
-<p>import com.lht1936.ucclub.core.ServiceException;<br />
-import org.aspectj.lang.annotation.Aspect;<br />
-import org.springframework.aop.Advisor;<br />
-import org.springframework.aop.aspectj.AspectJExpressionPointcut;<br />
-import org.springframework.aop.support.DefaultPointcutAdvisor;<br />
-import org.springframework.beans.factory.annotation.Autowired;<br />
-import org.springframework.context.annotation.Bean;<br />
-import org.springframework.context.annotation.Configuration;<br />
-import org.springframework.transaction.PlatformTransactionManager;<br />
-import org.springframework.transaction.TransactionDefinition;<br />
-import org.springframework.transaction.interceptor.*;</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Aspect</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TransationAdviceConfig</span> <span class="o">{</span>
 
-<p>import java.util.Collections;<br />
-import java.util.HashMap;<br />
-import java.util.Map;</p>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">TX_METHOD_TIMEOUT</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
 
-<p>@Aspect<br />
-@Configuration<br />
-public class TransationAdviceConfig {</p>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">AOP_POINTCUT_EXPRESSION</span> <span class="o">=</span> <span class="s">"execution(* com.***.service.impl..*.*.*(..))"</span><span class="o">;</span>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>private static final int TX_METHOD_TIMEOUT = 5;
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">PlatformTransactionManager</span> <span class="n">transactionManager</span><span class="o">;</span>
 
-private static final String AOP_POINTCUT_EXPRESSION = "execution(* com.***.service.impl..*.*.*(..))";
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">TransactionInterceptor</span> <span class="n">txAdvice</span><span class="o">()</span> <span class="o">{</span>
 
-@Autowired
-private PlatformTransactionManager transactionManager;
+        <span class="n">NameMatchTransactionAttributeSource</span> <span class="n">source</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NameMatchTransactionAttributeSource</span><span class="o">();</span>
 
-@Bean
-public TransactionInterceptor txAdvice() {
+        <span class="n">RuleBasedTransactionAttribute</span> <span class="n">readOnlyRule</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RuleBasedTransactionAttribute</span><span class="o">();</span>
+        <span class="n">readOnlyRule</span><span class="o">.</span><span class="na">setReadOnly</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">readOnlyRule</span><span class="o">.</span><span class="na">setPropagationBehavior</span><span class="o">(</span><span class="n">TransactionDefinition</span><span class="o">.</span><span class="na">PROPAGATION_NOT_SUPPORTED</span><span class="o">);</span>
 
-    NameMatchTransactionAttributeSource source = new NameMatchTransactionAttributeSource();
+        <span class="n">RuleBasedTransactionAttribute</span> <span class="n">requireRule</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RuleBasedTransactionAttribute</span><span class="o">();</span>
+        <span class="n">requireRule</span><span class="o">.</span><span class="na">setRollbackRules</span><span class="o">(</span><span class="n">Collections</span><span class="o">.</span><span class="na">singletonList</span><span class="o">(</span><span class="k">new</span> <span class="n">RollbackRuleAttribute</span><span class="o">(</span><span class="n">ServiceException</span><span class="o">.</span><span class="na">class</span><span class="o">)));</span>
+        <span class="n">requireRule</span><span class="o">.</span><span class="na">setPropagationBehavior</span><span class="o">(</span><span class="n">TransactionDefinition</span><span class="o">.</span><span class="na">PROPAGATION_REQUIRED</span><span class="o">);</span>
 
-    RuleBasedTransactionAttribute readOnlyRule = new RuleBasedTransactionAttribute();
-    readOnlyRule.setReadOnly(true);
-    readOnlyRule.setPropagationBehavior(TransactionDefinition.PROPAGATION_NOT_SUPPORTED);
+        <span class="n">requireRule</span><span class="o">.</span><span class="na">setTimeout</span><span class="o">(</span><span class="n">TX_METHOD_TIMEOUT</span><span class="o">);</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">TransactionAttribute</span><span class="o">&gt;</span> <span class="n">txMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"add*"</span><span class="o">,</span> <span class="n">requireRule</span><span class="o">);</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"save*"</span><span class="o">,</span> <span class="n">requireRule</span><span class="o">);</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"insert*"</span><span class="o">,</span> <span class="n">requireRule</span><span class="o">);</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"update*"</span><span class="o">,</span> <span class="n">requireRule</span><span class="o">);</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"delete*"</span><span class="o">,</span> <span class="n">requireRule</span><span class="o">);</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"remove*"</span><span class="o">,</span> <span class="n">requireRule</span><span class="o">);</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"get*"</span><span class="o">,</span> <span class="n">readOnlyRule</span><span class="o">);</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"query*"</span><span class="o">,</span> <span class="n">readOnlyRule</span><span class="o">);</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"find*"</span><span class="o">,</span> <span class="n">readOnlyRule</span><span class="o">);</span>
+        <span class="n">txMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"select*"</span><span class="o">,</span> <span class="n">readOnlyRule</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">setNameMap</span><span class="o">(</span><span class="n">txMap</span><span class="o">);</span>
+        <span class="n">TransactionInterceptor</span> <span class="n">txAdvice</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TransactionInterceptor</span><span class="o">(</span><span class="n">transactionManager</span><span class="o">,</span> <span class="n">source</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">txAdvice</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    RuleBasedTransactionAttribute requireRule = new RuleBasedTransactionAttribute();
-    requireRule.setRollbackRules(Collections.singletonList(new RollbackRuleAttribute(ServiceException.class)));
-    requireRule.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-
-    requireRule.setTimeout(TX_METHOD_TIMEOUT);
-    Map&lt;String, TransactionAttribute&gt; txMap = new HashMap&lt;&gt;();
-    txMap.put("add*", requireRule);
-    txMap.put("save*", requireRule);
-    txMap.put("insert*", requireRule);
-    txMap.put("update*", requireRule);
-    txMap.put("delete*", requireRule);
-    txMap.put("remove*", requireRule);
-    txMap.put("get*", readOnlyRule);
-    txMap.put("query*", readOnlyRule);
-    txMap.put("find*", readOnlyRule);
-    txMap.put("select*", readOnlyRule);
-    source.setNameMap(txMap);
-    TransactionInterceptor txAdvice = new TransactionInterceptor(transactionManager, source);
-    return txAdvice;
-}
-
-@Bean
-public Advisor txAdviceAdvisor() {
-    AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-    pointcut.setExpression(AOP_POINTCUT_EXPRESSION);
-    return new DefaultPointcutAdvisor(pointcut, txAdvice());
-} } ``` 还需要在启动Class上使用注解@EnableTransactionManagement启用事务管理。
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">Advisor</span> <span class="n">txAdviceAdvisor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">AspectJExpressionPointcut</span> <span class="n">pointcut</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AspectJExpressionPointcut</span><span class="o">();</span>
+        <span class="n">pointcut</span><span class="o">.</span><span class="na">setExpression</span><span class="o">(</span><span class="n">AOP_POINTCUT_EXPRESSION</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">DefaultPointcutAdvisor</span><span class="o">(</span><span class="n">pointcut</span><span class="o">,</span> <span class="n">txAdvice</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
+
+<p>还需要在启动Class上使用注解@EnableTransactionManagement启用事务管理。</p>
 
 <h2 id="web">Web层迁移</h2>
 
-<p>SpringMVC消息转换器以及文件上传配置:<br />
-```xml</p>
-<annotation-driven>	
-		<message-converters>
-			<beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<!--解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation -->
-				<beans:property name="supportedMediaTypes">
-					<beans:list>
-                        <beans:value>text/html;charset=UTF-8</beans:value>
-                        <beans:value>text/json;charset=UTF-8</beans:value>
-                        <beans:value>application/json;charset=UTF-8</beans:value>
-						<beans:value>application/x-www-form-urlencoded;charset=UTF-8</beans:value>
-						<beans:value>application/x-www-form-urlencoded</beans:value>
-					</beans:list>
-				</beans:property>
-			</beans:bean>
-    	</message-converters>
-</annotation-driven>
+<p>SpringMVC消息转换器以及文件上传配置:</p>
 
-<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="104857600" />
-		<beans:property name="maxInMemorySize" value="4096" />
-		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
-		<beans:property name="uploadTempDir" value="upload/temp"></beans:property>
-</beans:bean>
-<div class="highlighter-rouge"><pre class="highlight"><code>
-```Java
-package com.lht1936.ucclub.config.web;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;annotation-driven&gt;</span>	
+		<span class="nt">&lt;message-converters</span> <span class="nt">&gt;</span>
+			<span class="nt">&lt;beans:bean</span> <span class="na">class=</span><span class="s">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span><span class="nt">&gt;</span>
+				<span class="c">&lt;!--解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation --&gt;</span>
+				<span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"supportedMediaTypes"</span><span class="nt">&gt;</span>
+					<span class="nt">&lt;beans:list&gt;</span>
+                        <span class="nt">&lt;beans:value&gt;</span>text/html;charset=UTF-8<span class="nt">&lt;/beans:value&gt;</span>
+                        <span class="nt">&lt;beans:value&gt;</span>text/json;charset=UTF-8<span class="nt">&lt;/beans:value&gt;</span>
+                        <span class="nt">&lt;beans:value&gt;</span>application/json;charset=UTF-8<span class="nt">&lt;/beans:value&gt;</span>
+						<span class="nt">&lt;beans:value&gt;</span>application/x-www-form-urlencoded;charset=UTF-8<span class="nt">&lt;/beans:value&gt;</span>
+						<span class="nt">&lt;beans:value&gt;</span>application/x-www-form-urlencoded<span class="nt">&lt;/beans:value&gt;</span>
+					<span class="nt">&lt;/beans:list&gt;</span>
+				<span class="nt">&lt;/beans:property&gt;</span>
+			<span class="nt">&lt;/beans:bean&gt;</span>
+    	<span class="nt">&lt;/message-converters&gt;</span>
+<span class="nt">&lt;/annotation-driven&gt;</span>
+	
+<span class="nt">&lt;beans:bean</span> <span class="na">id=</span><span class="s">"multipartResolver"</span> <span class="na">class=</span><span class="s">"org.springframework.web.multipart.commons.CommonsMultipartResolver"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"maxUploadSize"</span> <span class="na">value=</span><span class="s">"104857600"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"maxInMemorySize"</span> <span class="na">value=</span><span class="s">"4096"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"defaultEncoding"</span> <span class="na">value=</span><span class="s">"UTF-8"</span><span class="nt">&gt;&lt;/beans:property&gt;</span>
+		<span class="nt">&lt;beans:property</span> <span class="na">name=</span><span class="s">"uploadTempDir"</span> <span class="na">value=</span><span class="s">"upload/temp"</span><span class="nt">&gt;&lt;/beans:property&gt;</span>
+<span class="nt">&lt;/beans:bean&gt;</span>
+</code></pre>
+</div>
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+<p>SpringBoot对应的Java Config:</p>
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MvcConfiguration</span> <span class="kd">extends</span> <span class="n">WebMvcConfigurerAdapter</span> <span class="o">{</span>
 
-@Configuration
-public class MvcConfiguration extends WebMvcConfigurerAdapter {
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">configureMessageConverters</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">converters</span><span class="o">){</span>
+        <span class="n">MappingJackson2HttpMessageConverter</span> <span class="n">converter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MappingJackson2HttpMessageConverter</span><span class="o">();</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">MediaType</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">);</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON_UTF8</span><span class="o">);</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">);</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_FORM_URLENCODED</span><span class="o">);</span>
+        <span class="n">converter</span><span class="o">.</span><span class="na">setSupportedMediaTypes</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+        <span class="n">converters</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">converter</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    public void configureMessageConverters(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters){
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        List&lt;MediaType&gt; list = new ArrayList&lt;&gt;();
-        list.add(MediaType.TEXT_HTML);
-        list.add(MediaType.APPLICATION_JSON_UTF8);
-        list.add(MediaType.APPLICATION_JSON);
-        list.add(MediaType.APPLICATION_FORM_URLENCODED);
-        converter.setSupportedMediaTypes(list);
-        converters.add(converter);
-    }
-
-    @Bean(name = {"multipartResolver"})
-    public MultipartResolver multipartResolver() throws IOException {
-        CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver();
-        commonsMultipartResolver.setDefaultEncoding("UTF-8");
-        commonsMultipartResolver.setMaxUploadSize(10485760L);
-        commonsMultipartResolver.setMaxInMemorySize(4096);
-        commonsMultipartResolver.setUploadTempDir(new FileSystemResource("upload/temp"));
-        return commonsMultipartResolver;
-    }
-}
+    <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="o">{</span><span class="s">"multipartResolver"</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="n">MultipartResolver</span> <span class="n">multipartResolver</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">CommonsMultipartResolver</span> <span class="n">commonsMultipartResolver</span><span class="o">=</span><span class="k">new</span> <span class="n">CommonsMultipartResolver</span><span class="o">();</span>
+        <span class="n">commonsMultipartResolver</span><span class="o">.</span><span class="na">setDefaultEncoding</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">);</span>
+        <span class="n">commonsMultipartResolver</span><span class="o">.</span><span class="na">setMaxUploadSize</span><span class="o">(</span><span class="mi">10485760L</span><span class="o">);</span>
+        <span class="n">commonsMultipartResolver</span><span class="o">.</span><span class="na">setMaxInMemorySize</span><span class="o">(</span><span class="mi">4096</span><span class="o">);</span>
+        <span class="n">commonsMultipartResolver</span><span class="o">.</span><span class="na">setUploadTempDir</span><span class="o">(</span><span class="k">new</span> <span class="n">FileSystemResource</span><span class="o">(</span><span class="s">"upload/temp"</span><span class="o">));</span>
+        <span class="k">return</span> <span class="n">commonsMultipartResolver</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
@@ -424,19 +406,21 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     <p>DispatcherServlet也不需要配置了，SpringBoot会自动配置</p>
   </li>
   <li>
-    <p>UTF-8编码过滤器改为使用配置实现:<br />
-<code class="highlighter-rouge">yaml
-# Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
+    <p>UTF-8编码过滤器改为使用配置实现:</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
 spring.http.encoding.charset=UTF-8
 # Enable http encoding support.
 spring.http.encoding.enabled=true
 # Force the encoding to the configured charset on HTTP requests and responses.
 spring.http.encoding.force=true
-</code></p>
-  </li>
-  <li>
-    <p>自定义Filter在Configuration类中配置，并且可以指定顺序：</p>
-  </li>
+</code></pre>
+</div>
+
+<ol>
+  <li>自定义Filter在Configuration类中配置，并且可以指定顺序：</li>
 </ol>
 
 <pre><code class="language-Java">@Bean
@@ -458,7 +442,7 @@ spring.http.encoding.force=true
   <li>SpringBoot 2.0开始在将Java对象转换为JSON时，会自动将Date类型字段转为UTC格式，可以通知修改配置改为时间戳：</li>
 </ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">spring.jackson.serialization.write-dates-as-timestamps=true</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>spring.jackson.serialization.write-dates-as-timestamps=true
 </code></pre>
 </div>
 
