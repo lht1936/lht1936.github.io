@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+    <title>从SpringMVC迁移到SpringBoot</title>
+    <meta name="description"
+          content="SpringBoot是大势所趋，个人认为">
+
+    <link rel="canonical" href="http://lht1936.github.io/java/2018/10/19/springmvc-to-springboot.html">
+    <link rel="alternate" type="application/rss+xml" title="湘江鸿的博客" href="http://lht1936.github.io/feed.xml">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link href="https://cdn.bootcss.com/gitalk/1.2.2/gitalk.css" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="container">
+        <a id="site-header-brand" href="/" title="湘江鸿">
+            <span class="octicon octicon-mark-github"></span> 湘江鸿
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <a href="/"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Home">
+                Home
+            </a>
+            
+            <a href="/archives"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Archives">
+                Archives
+            </a>
+            
+            <a href="/bookmark"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Bookmark">
+                Bookmark
+            </a>
+            
+            <a href="/open-source"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="Open-Source">
+                Open-Source
+            </a>
+            
+            <a href="/about"
+               class=" site-header-nav-item hvr-underline-from-center"
+               target=""
+               title="About">
+                About
+            </a>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="从SpringMVC迁移到SpringBoot">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            <h1>从SpringMVC迁移到SpringBoot</h1>
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2018/10/19
+                
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <p>SpringBoot是大势所趋，个人认为</p>
+
+<ol>
+  <li>
+    <p>SpringBoot简化了开发环境的搭建，包括依赖包的管理，配置的管理等;</p>
+  </li>
+  <li>
+    <p>便于应用微服务架构，从单体SpringBoot到SpringCloud微服务架构体系是平滑的；</p>
+  </li>
+</ol>
+
+<p>本文记录个人将某个项目从SpringMVC迁移到SpringBoot所关注的几个方面。</p>
+
+<h2 id="mybatis">数据库层迁移（Mybatis）</h2>
+
+<h3 id="section">1.数据源变更</h3>
+
+<p>SpringBoot项目中很少使用XML配置，我们的主要工作就是将SpringMVC项目中的XML配置转化为对应的Java配置。</p>
+
+<p>SpringMVC的XML数据源配置：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"datasource"</span> <span class="na">class=</span><span class="s">"com.mchange.v2.c3p0.ComboPooledDataSource"</span>
+		<span class="na">p:driverClass=</span><span class="s">"${db.driverClass}"</span> <span class="na">p:jdbcUrl=</span><span class="s">"${db.jdbcUrl}"</span> <span class="na">p:user=</span><span class="s">"${db.user}"</span>
+		<span class="na">p:password=</span><span class="s">"${db.password}"</span> <span class="na">p:initialPoolSize=</span><span class="s">"${db.initialPoolSize}"</span>
+		<span class="na">p:minPoolSize=</span><span class="s">"${db.minPoolSize}"</span> <span class="na">p:maxPoolSize=</span><span class="s">"${db.maxPoolSize}"</span>
+		<span class="na">p:preferredTestQuery=</span><span class="s">"${db.preferredTestQuery}"</span> <span class="na">p:testConnectionOnCheckin=</span><span class="s">"true"</span>
+		<span class="na">p:idleConnectionTestPeriod=</span><span class="s">"300"</span> <span class="na">destroy-method=</span><span class="s">"close"</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
+<p>SpringBoot数据源配置：</p>
+
+<pre><code class="language-Java">@Configuration
+public class DataSourceConfiguration {
+
+    @Value("${db.driverClass}")
+    private String jdbcDriver;
+
+    @Value("${db.jdbcUrl}")
+    private String jdbcUrl;
+
+    @Value("${db.user}")
+    private String jdbcUsername;
+
+    @Value("${db.password}")
+    private String jdbcPassword;
+
+    @Value("${db.preferredTestQuery}")
+    private String preferredTestQuery;
+
+    @Value("${db.initialPoolSize}")
+    private Integer initialPoolSize;
+
+    @Value("${db.minPoolSize}")
+    private Integer minPoolSize;
+
+    @Value("${db.maxPoolSize}")
+    private Integer maxPoolSize;
+
+    @Bean(destroyMethod = "close")
+    public ComboPooledDataSource createDataSource() throws Exception {
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setDriverClass(jdbcDriver);
+        dataSource.setJdbcUrl(jdbcUrl);
+        dataSource.setUser(jdbcUsername);
+        dataSource.setPassword(jdbcPassword);
+        dataSource.setPreferredTestQuery(preferredTestQuery);
+        dataSource.setInitialPoolSize(initialPoolSize);
+        dataSource.setMaxPoolSize(maxPoolSize);
+        dataSource.setMinPoolSize(minPoolSize);
+        dataSource.setTestConnectionOnCheckin(true);
+        dataSource.setIdleConnectionTestPeriod(300);
+        return dataSource;
+    }
+
+}
+
+</code></pre>
+
+<h3 id="mybatissqlsessionfactory">2.Mybatis的SqlSessionFactory</h3>
+<p>SpringMVC的SqlSessionFactory定义如下<br />
+```xml</p>
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="wrappedDataSource"></property>
+        <property name="configLocation" value="classpath:spring/mybatis-config.xml"></property>
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:mybatis/*.xml</value>
+            </array>
+        </property>
+        <!-- 分页插件 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!-- config params as the following -->
+                        <value>
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+<div class="highlighter-rouge"><pre class="highlight"><code>转化为SpringBoot，需要引入mybatis的自动配置jar包，分页jar包。
+在POM文件中添加如下jar包:
+```xml
+&lt;dependency&gt;
+    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;1.3.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
+    &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;1.2.8&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
+<p>并在application.properties中添加如下配置：<br />
+<code class="highlighter-rouge">yaml
+mybatis.config-location=classpath:mybatis-config.xml
+mybatis.mapper-locations=classpath:mapper/*.xml
+pagehelper.helper-dialect=mysql
+</code><br />
+SqlSessionFactory能自动找到Spring容器中的DataSource 实例。</p>
+
+<p>还需要告诉Mybatis从哪个包里搜索Mapper实例，在启动Class上使用注解@MapperScan完成。</p>
+
+<h2 id="section-1">服务层迁移</h2>
+
+<p>服务层主要是事务的迁移，在SpringMVC中，在XML文件中定义切片，并根据特定的异常类型进行事务回滚（在这里是ServiceException）。<br />
+```xml</p>
+<aop:config>
+        <aop:pointcut id="txPointCutDef" expression="this(com.jhcl.ucclub.core.TransactionalAspectAwareService)" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCutDef" />
+    </aop:config>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;tx:advice id="txAdvice" transaction-manager="transactionManager"&gt;
+    &lt;tx:attributes&gt;
+        &lt;tx:method name="get*" read-only="true"/&gt;
+        &lt;tx:method name="list*" read-only="true"/&gt;
+        &lt;tx:method name="search*" read-only="true"/&gt;
+        &lt;tx:method name="select*" read-only="true"/&gt;
+        &lt;tx:method name="view*" read-only="true"/&gt;
+        &lt;tx:method name="*" read-only="false" propagation="REQUIRED"
+                   rollback-for="com.jhcl.ucclub.core.ServiceException"/&gt;
+    &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt; ```
+</code></pre>
+</div>
+
+<p>SpringBoot中使用Java Config完成：<br />
+```Java<br />
+package com.lht1936.ucclub.config.service;</p>
+
+<p>import com.lht1936.ucclub.core.ServiceException;<br />
+import org.aspectj.lang.annotation.Aspect;<br />
+import org.springframework.aop.Advisor;<br />
+import org.springframework.aop.aspectj.AspectJExpressionPointcut;<br />
+import org.springframework.aop.support.DefaultPointcutAdvisor;<br />
+import org.springframework.beans.factory.annotation.Autowired;<br />
+import org.springframework.context.annotation.Bean;<br />
+import org.springframework.context.annotation.Configuration;<br />
+import org.springframework.transaction.PlatformTransactionManager;<br />
+import org.springframework.transaction.TransactionDefinition;<br />
+import org.springframework.transaction.interceptor.*;</p>
+
+<p>import java.util.Collections;<br />
+import java.util.HashMap;<br />
+import java.util.Map;</p>
+
+<p>@Aspect<br />
+@Configuration<br />
+public class TransationAdviceConfig {</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>private static final int TX_METHOD_TIMEOUT = 5;
+
+private static final String AOP_POINTCUT_EXPRESSION = "execution(* com.***.service.impl..*.*.*(..))";
+
+@Autowired
+private PlatformTransactionManager transactionManager;
+
+@Bean
+public TransactionInterceptor txAdvice() {
+
+    NameMatchTransactionAttributeSource source = new NameMatchTransactionAttributeSource();
+
+    RuleBasedTransactionAttribute readOnlyRule = new RuleBasedTransactionAttribute();
+    readOnlyRule.setReadOnly(true);
+    readOnlyRule.setPropagationBehavior(TransactionDefinition.PROPAGATION_NOT_SUPPORTED);
+
+    RuleBasedTransactionAttribute requireRule = new RuleBasedTransactionAttribute();
+    requireRule.setRollbackRules(Collections.singletonList(new RollbackRuleAttribute(ServiceException.class)));
+    requireRule.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+
+    requireRule.setTimeout(TX_METHOD_TIMEOUT);
+    Map&lt;String, TransactionAttribute&gt; txMap = new HashMap&lt;&gt;();
+    txMap.put("add*", requireRule);
+    txMap.put("save*", requireRule);
+    txMap.put("insert*", requireRule);
+    txMap.put("update*", requireRule);
+    txMap.put("delete*", requireRule);
+    txMap.put("remove*", requireRule);
+    txMap.put("get*", readOnlyRule);
+    txMap.put("query*", readOnlyRule);
+    txMap.put("find*", readOnlyRule);
+    txMap.put("select*", readOnlyRule);
+    source.setNameMap(txMap);
+    TransactionInterceptor txAdvice = new TransactionInterceptor(transactionManager, source);
+    return txAdvice;
+}
+
+@Bean
+public Advisor txAdviceAdvisor() {
+    AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
+    pointcut.setExpression(AOP_POINTCUT_EXPRESSION);
+    return new DefaultPointcutAdvisor(pointcut, txAdvice());
+} } ``` 还需要在启动Class上使用注解@EnableTransactionManagement启用事务管理。
+</code></pre>
+</div>
+
+<h2 id="web">Web层迁移</h2>
+
+<p>SpringMVC消息转换器以及文件上传配置:<br />
+```xml</p>
+<annotation-driven>	
+		<message-converters>
+			<beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<!--解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation -->
+				<beans:property name="supportedMediaTypes">
+					<beans:list>
+                        <beans:value>text/html;charset=UTF-8</beans:value>
+                        <beans:value>text/json;charset=UTF-8</beans:value>
+                        <beans:value>application/json;charset=UTF-8</beans:value>
+						<beans:value>application/x-www-form-urlencoded;charset=UTF-8</beans:value>
+						<beans:value>application/x-www-form-urlencoded</beans:value>
+					</beans:list>
+				</beans:property>
+			</beans:bean>
+    	</message-converters>
+</annotation-driven>
+
+<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="104857600" />
+		<beans:property name="maxInMemorySize" value="4096" />
+		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
+		<beans:property name="uploadTempDir" value="upload/temp"></beans:property>
+</beans:bean>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+```Java
+package com.lht1936.ucclub.config.web;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+@Configuration
+public class MvcConfiguration extends WebMvcConfigurerAdapter {
+
+    public void configureMessageConverters(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters){
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        List&lt;MediaType&gt; list = new ArrayList&lt;&gt;();
+        list.add(MediaType.TEXT_HTML);
+        list.add(MediaType.APPLICATION_JSON_UTF8);
+        list.add(MediaType.APPLICATION_JSON);
+        list.add(MediaType.APPLICATION_FORM_URLENCODED);
+        converter.setSupportedMediaTypes(list);
+        converters.add(converter);
+    }
+
+    @Bean(name = {"multipartResolver"})
+    public MultipartResolver multipartResolver() throws IOException {
+        CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver();
+        commonsMultipartResolver.setDefaultEncoding("UTF-8");
+        commonsMultipartResolver.setMaxUploadSize(10485760L);
+        commonsMultipartResolver.setMaxInMemorySize(4096);
+        commonsMultipartResolver.setUploadTempDir(new FileSystemResource("upload/temp"));
+        return commonsMultipartResolver;
+    }
+}
+</code></pre>
+</div>
+
+<h2 id="webxml-">Web.xml 配置文件迁移</h2>
+
+<ol>
+  <li>
+    <p>由于注解都会被@SpringBootApplication扫描到并且加入到Spring容器中，消除了XML文件中的bean定义，所以ContextLoaderListener不需要了。</p>
+  </li>
+  <li>
+    <p>DispatcherServlet也不需要配置了，SpringBoot会自动配置</p>
+  </li>
+  <li>
+    <p>UTF-8编码过滤器改为使用配置实现:<br />
+<code class="highlighter-rouge">yaml
+# Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
+spring.http.encoding.charset=UTF-8
+# Enable http encoding support.
+spring.http.encoding.enabled=true
+# Force the encoding to the configured charset on HTTP requests and responses.
+spring.http.encoding.force=true
+</code></p>
+  </li>
+  <li>
+    <p>自定义Filter在Configuration类中配置，并且可以指定顺序：</p>
+  </li>
+</ol>
+
+<pre><code class="language-Java">@Bean
+    public FilterRegistrationBean testFilterRegistration() {
+
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(new MyFilter());
+        registration.addUrlPatterns("/*");
+        registration.addInitParameter("paramName", "paramValue");
+        registration.setName("MyFilter");
+        registration.setOrder(1);
+        return registration;
+    }
+</code></pre>
+
+<h2 id="section-2">其他</h2>
+
+<ol>
+  <li>SpringBoot 2.0开始在将Java对象转换为JSON时，会自动将Date类型字段转为UTC格式，可以通知修改配置改为时间戳：</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">spring.jackson.serialization.write-dates-as-timestamps=true</span>
+</code></pre>
+</div>
+
+<h2 id="section-3">总结</h2>
+<p>以上，便是从SpringMVC迁移到SpringBoot的一些关注点，后续还会根据情况补充更新。</p>
+
+
+            <!-- copyright -->
+            <div>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://lht1936.github.io">湘江鸿的博客</a>）</strong>
+   </p>
+</div>
+            <!-- Comments -->
+            <div class="comment">
+                
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: '/java/2018/10/19/springmvc-to-springboot.html',
+            clientID: '2347868ee370ead4247e',
+            clientSecret: '4fc5fe85a6458851c4c46f7508ee72940dbb5801',
+            repo: 'lht1936.github.io',
+            owner: 'lht1936',
+            admin: ['lht1936'],
+            labels: ['gitment'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+        </div>
+        
+
+    </div>
+
+</article>
+
+        </div>
+
+    <footer class="container">
+
+    <div class="site-footer">
+
+        <div class="site-footer-icons">
+            <a target="_blank" href="https://weibo.com/u/1260208131">
+                微博
+            </a>
+            <a target="_blank" href="https://github.com/lht1936">
+                Github
+            </a>
+        </div>
+
+        <div class="scrolltop">
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+
+    </div>
+
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+
+    
+
+    <!---->
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66018191" charset="UTF-8"></script>
+</footer>
+
+
+    </body>
+
+</html>
