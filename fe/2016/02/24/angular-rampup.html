@@ -126,39 +126,39 @@
 最新的安装地址在<a href="https://github.com/angelozerr/angularjs-eclipse/wiki/Installation-Update-Site">这里</a>。</p>
 
 <p>2.在eclipse中选择help-&gt;install new software，输入插件安装地址，选择所有的插件：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/augular-getting-started-1.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/augular-getting-started-1.png" alt="" /></p>
 
 <p>3.安装插件预览：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/auglar-getting-started-2.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/auglar-getting-started-2.png" alt="" /></p>
 
 <h2 id="section">插件配置</h2>
 <ol>
   <li>全局配置<br />
 由于AngularJS插件使用了JavaScript分析引擎tern.js（使用JavaScript编写），因此需要node.js来执行这个引擎。<br />
 选择eclipse/偏好设置，由于JEE版本的eclipse包含了JSDT，tern配置节点在JavaScript节点之下：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-3.png" alt="" /></li>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-3.png" alt="" /></li>
 </ol>
 
 <p>保持默认配置即可，默认使用的是安装插件时已经装好的node.js。<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-4.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-4.png" alt="" /></p>
 
 <p>2.项目配置<br />
 新建一个dynamic web project，并且转为angular项目<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-5a.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-5a.png" alt="" /></p>
 
 <p>选择Tern支持插件，我在保持默认的基础上选择了jQuery，并确定<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-6.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-6.png" alt="" /></p>
 
 <p>打开项目属性，可以看到项目属性里增加了AngularJS和Tern，说明已经是angular项目了：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-7a.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-7a.png" alt="" /></p>
 
 <p>3.脚本路径配置<br />
 使用Tern进行代码完成，代码验证等特性，Tern需要预先加载JavaScript文件，这样就可以用于代码完成和代码验证了。<br />
 在WebContent下面新建js文件夹，并将下载的angular.js拖到其中：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-8.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-8.png" alt="" /></p>
 
 <p>打开项目属性，可以看到script paths 已经自动加入了angular.js<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-9.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-9.png" alt="" /></p>
 
 <h2 id="section-1">检查验证功能是否有效</h2>
 <p>新建一个html文件，输入以下简单angular代码：</p>
@@ -182,20 +182,20 @@
 </div>
 
 <p>可以看到ng-app还是带黄色下划线警告：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-10.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-10.png" alt="" /></p>
 
 <p>我们打开项目属性，在Validation节点下做如下配置。<br />
 关闭html syntax validator和JSP content validator，选择对应的angular validator<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-11.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-11.png" alt="" /></p>
 
 <p>关闭已经打开的html文件，再次打开，可以看到警告已经消失：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-12.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-12.png" alt="" /></p>
 
 <h2 id="section-2">代码提示功能</h2>
-<p><img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-13.png" alt="" /></p>
+<p><img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-13.png" alt="" /></p>
 
 <h2 id="section-3">部署应用</h2>
-<p><img src="http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-14.png" alt="" /></p>
+<p><img src="http://lht1936.github.io/assets/images/2016/angular-getting-started-14.png" alt="" /></p>
 
 
 

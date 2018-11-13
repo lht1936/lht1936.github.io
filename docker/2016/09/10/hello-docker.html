@@ -154,25 +154,25 @@ Mac Docker: https://download.docker.com/mac/stable/Docker.dmg</p>
 
 <p>DaoCloud: http://www.daocloud.io/<br />
 因为GFW的原因，下载image会很慢，甚至无法完成下载，所以应该使用国内的镜像，daocloud提供对官方的镜像服务，还有自己的镜像:<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/daocloud-services.png" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/daocloud-services.png" alt="" /></p>
 
 <p>将镜像地址添加Docker中<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/docker-agent-http-address" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/docker-agent-http-address" alt="" /></p>
 
 <p>使用国内镜像后，下载速度确实变快了，为了确实使用了镜像，首先查看下载进程的id：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/show-docker-process" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/show-docker-process" alt="" /></p>
 
 <p>很明显，进程id为26323名为com.docker.slirp的进程正在下载。</p>
 
 <p>查看进程网络通信的目标ip地址：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/show-docker-foreign-address" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/show-docker-foreign-address" alt="" /></p>
 
 <p>在ip.cn上一查就知道在国内咯:<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/show-ip-home" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/show-ip-home" alt="" /></p>
 
 <h2 id="oracle-11g-express-edition">安装Oracle 11g Express Edition</h2>
 <p>执行docker pull nameless/oracle-xe-11g 下载oracle<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/docker-oracle-downloaded" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/docker-oracle-downloaded" alt="" /></p>
 
 <p>20分钟左右下载完毕</p>
 
@@ -186,13 +186,13 @@ Mac Docker: https://download.docker.com/mac/stable/Docker.dmg</p>
 </div>
 
 <p>启动成功：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/run-docker-ubuntu-oracle-11g-xe" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/run-docker-ubuntu-oracle-11g-xe" alt="" /></p>
 
 <p>再次查看内存，发现hyperkit的内存已经占用到2.67G了，这就是启动的容器，里面运行着刚刚下载的image，包括Ubuntu操作系统和Oracle数据库服务：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/ubuntu-oracle-memory-use" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/ubuntu-oracle-memory-use" alt="" /></p>
 
 <p>SSH连接Ubuntu系统，用户名root，密码admin：<br />
-<img src="http://7xpph3.com1.z0.glb.clouddn.com/connect-docker-ubuntu" alt="" /></p>
+<img src="http://lht1936.github.io/assets/images/2016/connect-docker-ubuntu" alt="" /></p>
 
 <p>进入Ubuntu后，连接Oracle测试，用户名sys或者system，密码都是oracle</p>
 

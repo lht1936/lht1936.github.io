@@ -5,8 +5,8 @@
     <description>记录湘江鸿技术与生活的点点滴滴</description>
     <link>http://lht1936.github.io/</link>
     <atom:link href="http://lht1936.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 19 Oct 2018 22:28:04 +0800</pubDate>
-    <lastBuildDate>Fri, 19 Oct 2018 22:28:04 +0800</lastBuildDate>
+    <pubDate>Tue, 13 Nov 2018 21:40:09 +0800</pubDate>
+    <lastBuildDate>Tue, 13 Nov 2018 21:40:09 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -444,25 +444,25 @@ Mac Docker: https://download.docker.com/mac/stable/Docker.dmg&lt;/p&gt;
 
 &lt;p&gt;DaoCloud: http://www.daocloud.io/&lt;br /&gt;
 因为GFW的原因，下载image会很慢，甚至无法完成下载，所以应该使用国内的镜像，daocloud提供对官方的镜像服务，还有自己的镜像:&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/daocloud-services.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/daocloud-services.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;将镜像地址添加Docker中&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/docker-agent-http-address&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/docker-agent-http-address&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;使用国内镜像后，下载速度确实变快了，为了确实使用了镜像，首先查看下载进程的id：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/show-docker-process&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/show-docker-process&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;很明显，进程id为26323名为com.docker.slirp的进程正在下载。&lt;/p&gt;
 
 &lt;p&gt;查看进程网络通信的目标ip地址：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/show-docker-foreign-address&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/show-docker-foreign-address&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;在ip.cn上一查就知道在国内咯:&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/show-ip-home&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/show-ip-home&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;oracle-11g-express-edition&quot;&gt;安装Oracle 11g Express Edition&lt;/h2&gt;
 &lt;p&gt;执行docker pull nameless/oracle-xe-11g 下载oracle&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/docker-oracle-downloaded&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/docker-oracle-downloaded&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;20分钟左右下载完毕&lt;/p&gt;
 
@@ -476,13 +476,13 @@ Mac Docker: https://download.docker.com/mac/stable/Docker.dmg&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;启动成功：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/run-docker-ubuntu-oracle-11g-xe&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/run-docker-ubuntu-oracle-11g-xe&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;再次查看内存，发现hyperkit的内存已经占用到2.67G了，这就是启动的容器，里面运行着刚刚下载的image，包括Ubuntu操作系统和Oracle数据库服务：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/ubuntu-oracle-memory-use&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/ubuntu-oracle-memory-use&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;SSH连接Ubuntu系统，用户名root，密码admin：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/connect-docker-ubuntu&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/connect-docker-ubuntu&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;进入Ubuntu后，连接Oracle测试，用户名sys或者system，密码都是oracle&lt;/p&gt;
 
@@ -571,13 +571,13 @@ open Coding_iOS.xcworkspace
 &lt;/div&gt;
 
 &lt;p&gt;pod install即为安装依赖库，这个过程比较慢，而且需要翻墙，否则下载不下来。&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/import-codingios-to-xcode-1.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/import-codingios-to-xcode-1.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
 需要注意的是，下载友盟库的时候，又需要切换为国内网络，因为友盟库的服务器在国内，使用vpn可能会下载不下来，看你的vpn支不支持了。&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/import-codingios-to-xcode-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/import-codingios-to-xcode-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;最后在xCode中打开项目并运行:&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/import-codingios-to-xcode-3.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/import-codingios-to-xcode-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/import-codingios-to-xcode-3.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/import-codingios-to-xcode-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 16 Mar 2016 00:00:00 +0800</pubDate>
         <link>http://lht1936.github.io/ios/2016/03/16/import-codingios-to-xcode.html</link>
@@ -665,7 +665,7 @@ http://stackoverflow.com/questions/29443681/how-to-install-xcode-documentation-b
 
 &lt;h2 id=&quot;section&quot;&gt;插件安装&lt;/h2&gt;
 &lt;p&gt;执行Spring源码包根目录下的import-into-eclipse.sh可以生成eclipse相关的工程文件，执行后显示如下信息：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/spring-import-eclipse-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;提示需要安装AJDT和groovy插件。&lt;/p&gt;
 
@@ -675,15 +675,15 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
 适用于eclipse4.5的dev版本：http://download.eclipse.org/tools/ajdt/45/dev/update。&lt;/p&gt;
 
 &lt;p&gt;在eclipse中安装AJDT dev version for eclipse 4.5:&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/spring-import-eclipse-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;install details:&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/spring-import-eclipse-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;2.安装groovy插件&lt;br /&gt;
 插件获取地址：https://github.com/groovy/groovy-eclipse/wiki&lt;br /&gt;
 刚好最新能支持到eclipse4.5：http://dist.springsource.org/snapshot/GRECLIPSE/e4.5/&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/spring-import-eclipse-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/spring-import-eclipse-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;eclipse&quot;&gt;生成eclipse工程文件&lt;/h2&gt;
 &lt;p&gt;最后执行import-into-eclipse.sh，请自备梯子，很多文件下载很慢，有vpn就快多了。&lt;/p&gt;
@@ -705,39 +705,39 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
 最新的安装地址在&lt;a href=&quot;https://github.com/angelozerr/angularjs-eclipse/wiki/Installation-Update-Site&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;2.在eclipse中选择help-&amp;gt;install new software，输入插件安装地址，选择所有的插件：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/augular-getting-started-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/augular-getting-started-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;3.安装插件预览：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/auglar-getting-started-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/auglar-getting-started-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;插件配置&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;全局配置&lt;br /&gt;
 由于AngularJS插件使用了JavaScript分析引擎tern.js（使用JavaScript编写），因此需要node.js来执行这个引擎。&lt;br /&gt;
 选择eclipse/偏好设置，由于JEE版本的eclipse包含了JSDT，tern配置节点在JavaScript节点之下：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-3.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-3.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;保持默认配置即可，默认使用的是安装插件时已经装好的node.js。&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;2.项目配置&lt;br /&gt;
 新建一个dynamic web project，并且转为angular项目&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-5a.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-5a.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;选择Tern支持插件，我在保持默认的基础上选择了jQuery，并确定&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;打开项目属性，可以看到项目属性里增加了AngularJS和Tern，说明已经是angular项目了：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-7a.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-7a.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;3.脚本路径配置&lt;br /&gt;
 使用Tern进行代码完成，代码验证等特性，Tern需要预先加载JavaScript文件，这样就可以用于代码完成和代码验证了。&lt;br /&gt;
 在WebContent下面新建js文件夹，并将下载的angular.js拖到其中：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;打开项目属性，可以看到script paths 已经自动加入了angular.js&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-1&quot;&gt;检查验证功能是否有效&lt;/h2&gt;
 &lt;p&gt;新建一个html文件，输入以下简单angular代码：&lt;/p&gt;
@@ -761,20 +761,20 @@ AJDT插件最新地址可从此页面获取：http://www.eclipse.org/ajdt/downlo
 &lt;/div&gt;
 
 &lt;p&gt;可以看到ng-app还是带黄色下划线警告：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;我们打开项目属性，在Validation节点下做如下配置。&lt;br /&gt;
 关闭html syntax validator和JSP content validator，选择对应的angular validator&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;关闭已经打开的html文件，再次打开，可以看到警告已经消失：&lt;br /&gt;
-&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-12.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-12.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-2&quot;&gt;代码提示功能&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-3&quot;&gt;部署应用&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xpph3.com1.z0.glb.clouddn.com/angular-getting-started-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://lht1936.github.io/assets/images/2016/angular-getting-started-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 24 Feb 2016 00:00:00 +0800</pubDate>
